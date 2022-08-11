@@ -1,22 +1,37 @@
 import "./App.css";
+import MainLayout from "./layouts/MainLayout";
+import { Routes, Route, useLocation } from "react-router-dom";
+import Home from "./pages/Home";
+import Product from "./pages/Product";
+import Category from "./pages/Category";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import Redirect from "./pages/Redirect";
+import Login from "./pages/Login";
+import AdminLayout from "./layouts/AdminLayout";
+import ProductsManagement from "./pages/ProductsManagement";
+import StockPrice from "./pages/StockPrice";
+import Orders from "./pages/Orders";
 
 function App() {
+  const location = useLocation();
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes key={location.pathname} location={location}>
+      <Route element={<MainLayout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="product" element={<Product />} />
+        <Route path="category" element={<Category />} />
+        <Route path="cart" element={<Cart />} />
+        <Route path="checkout" element={<Checkout />} />
+        <Route path="redirect" element={<Redirect />} />
+      </Route>
+      <Route path="login" element={<Login />} />
+      <Route element={<AdminLayout />}>
+        <Route path="admin/products" element={<ProductsManagement />} />
+        <Route path="admin/stockprice" element={<StockPrice />} />
+        <Route path="admin/orders" element={<Orders />} />
+      </Route>
+    </Routes>
   );
 }
 
