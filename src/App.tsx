@@ -19,8 +19,8 @@ function App() {
     <Routes key={location.pathname} location={location}>
       <Route element={<MainLayout />}>
         <Route path="/" element={<Home />} />
-        <Route path="product" element={<Product />} />
-        <Route path="category" element={<Category />} />
+        <Route path="category:id" element={<Category />} />
+        <Route path="category:id/product:id" element={<Product />} />
         <Route path="cart" element={<Cart />} />
         <Route path="checkout" element={<Checkout />} />
         <Route path="redirect" element={<Redirect />} />
