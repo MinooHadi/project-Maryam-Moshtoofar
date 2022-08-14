@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-const Product = () => {
+const Product: React.FC = () => {
   const { id } = useParams();
   return <div>{`Product ${id}`}</div>;
 };

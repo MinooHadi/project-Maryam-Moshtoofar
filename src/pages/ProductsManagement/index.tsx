@@ -1,4 +1,4 @@
-const ProductsManagement = () => {
+const ProductsManagement: React.FC = () => {
   return <div>ProductsManagement</div>;
 };
 

@@ -1,4 +1,4 @@
-const Redirect = () => {
+const Redirect: React.FC = () => {
   return <div>Redirect</div>;
 };
 

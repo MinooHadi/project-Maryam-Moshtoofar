@@ -1,4 +1,4 @@
-const Checkout = () => {
+const Checkout: React.FC = () => {
   return <div>Checkout</div>;
 };
 

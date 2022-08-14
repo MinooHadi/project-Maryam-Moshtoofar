@@ -1,8 +1,8 @@
 import "./App.css";
 import AllRoutes from "./routes";
 
-function App() {
-  return <AllRoutes />;
-}
+const App: React.FC = () => {
+  return <AllRoutes />
+};
 
 export default App;
