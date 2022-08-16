@@ -1,14 +1,19 @@
 import React from "react";
+import "antd/dist/antd.min.css";
 import { Outlet } from "react-router-dom";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
-
+import { Layout } from "antd";
+import UserHeader from "../../components/Header";
+const { Content, Footer } = Layout;
 const MainLayout: React.FC = () => {
   return (
     <>
-      <Header />
-      <Outlet />
-      <Footer />
+      <Layout>
+        <UserHeader />
+          <Content style={{ padding: "0 50px", marginTop: 64 }}>
+            <Outlet />
+          </Content>
+        <Footer>footer</Footer>
+      </Layout>
     </>
   );
 };
