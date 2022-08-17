@@ -1,4 +1,5 @@
 import { Layout, Menu, Col, Row, Input } from "antd";
+import { NavLink } from "react-router-dom";
 import {
   SearchOutlined,
   UserOutlined,
@@ -34,30 +35,35 @@ const UserHeader: React.FC = () => {
           <Menu
             style={{ backgroundColor: "transparent" }}
             items={[
-              { label: "مدیریت", key: "item-1" },
+              {
+                label: <NavLink to="login">مدیریت</NavLink>,
+                key: "item-1",
+              },
               {
                 label: "دسته بندی",
                 key: "item-2",
                 children: [
                   {
-                    label: "پودر و دان قهوه",
+                    label: <NavLink to="category2">پودر و دانه قهوه</NavLink>,
                     key: "cat:1",
                   },
                   {
-                    label: "قهوه فوری",
+                    label: <NavLink to="category3">قهوه فوری</NavLink>,
                     key: "cat:2",
                   },
                   {
-                    label: "پکیج های قهوه",
+                    label: <NavLink to="category4">پکیج های قهوه</NavLink>,
                     key: "cat:3",
                   },
                   {
-                    label: "قهوه ساز و لوازم جانبی",
+                    label: (
+                      <NavLink to="category5">قهوه ساز و لوازم جانبی</NavLink>
+                    ),
                     key: "cat:4",
                   },
                 ],
               },
-              { label: "بلاگ", key: "item-3" },
+              { label: "بلاگ", key: "item-3", disabled: true },
               {
                 label: "صفحات",
                 key: "item-4",
@@ -65,14 +71,17 @@ const UserHeader: React.FC = () => {
                   {
                     label: "درباره ما",
                     key: "page:1",
+                    disabled: true,
                   },
                   {
                     label: "تماس با ما",
                     key: "page:2",
+                    disabled: true,
                   },
                   {
                     label: "سوالات متداول",
                     key: "page:3",
+                    disabled: true,
                   },
                 ],
               },
@@ -82,9 +91,15 @@ const UserHeader: React.FC = () => {
           />
         </Col>
         <Col className="span" span={5}>
-          <UserOutlined />
-          <HeartOutlined />
-          <ShoppingOutlined />
+          <NavLink to="#">
+            <UserOutlined />
+          </NavLink>
+          <NavLink to="#">
+            <HeartOutlined />
+          </NavLink>
+          <NavLink to="cart">
+            <ShoppingOutlined />
+          </NavLink>
         </Col>
       </Row>
     </Header>
