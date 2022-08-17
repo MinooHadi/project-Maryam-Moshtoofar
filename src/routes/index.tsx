@@ -12,7 +12,7 @@ import ProductsManagement from "../pages/ProductsManagement";
 import StockPrice from "../pages/StockPrice";
 import Orders from "../pages/Orders";
 
-const AllRoutes = () => {
+const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
@@ -35,4 +35,4 @@ const AllRoutes = () => {
   );
 };
 
-export default AllRoutes;
+export default AppRoutes;
