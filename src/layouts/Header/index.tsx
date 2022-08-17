@@ -6,10 +6,10 @@ import {
   ShoppingOutlined,
 } from "@ant-design/icons";
 import React from "react";
+import Logo from "../../assets/images/logo.png";
 
 const { Header } = Layout;
 const suffix = <SearchOutlined style={{ fontSize: 16 }} />;
-const onSearch = (value: string) => console.log(value);
 
 const UserHeader: React.FC = () => {
   return (
@@ -25,7 +25,7 @@ const UserHeader: React.FC = () => {
     >
       <Row className="Row">
         <Col className="span" span={4}>
-          COFFEE
+          <img src={Logo} alt="logo" />
         </Col>
         <Col className="span" span={5}>
           <Input allowClear placeholder="جستجو" size="large" prefix={suffix} />
