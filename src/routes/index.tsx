@@ -6,11 +6,11 @@ import Category from "../pages/Category";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
 import Redirect from "../pages/Redirect";
-import Login from "../pages/Login";
+import Login from "../pages/login";
 import AdminLayout from "../layouts/AdminLayout";
 import ProductsManagement from "../pages/ProductsManagement";
 import StockPrice from "../pages/StockPrice";
-import Orders from "../pages/Orders";
+import Orders from "../pages/orders";
 
 const AppRoutes = () => {
   return (
