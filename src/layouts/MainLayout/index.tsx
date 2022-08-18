@@ -7,7 +7,7 @@ const { Content, Footer } = Layout;
 const MainLayout: React.FC = () => {
   return (
     <>
-      <Layout style={{ backgroundColor: "green" }}>
+      <Layout>
         <UserHeader />
         <Content
           style={{

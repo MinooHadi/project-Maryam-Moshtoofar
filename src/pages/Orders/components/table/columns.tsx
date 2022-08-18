@@ -1,8 +1,8 @@
 export const columns = [
   {
     title: "نام کاربر",
-    dataIndex: "username",
-    key: "username",
+    dataIndex: "name",
+    key: "name",
   },
   {
     title: "مجموع مبلغ",

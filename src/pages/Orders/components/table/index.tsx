@@ -13,7 +13,7 @@ const OrdersTable: React.FC = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(fetchOrders());
-  });
+  }, []);
 
   return (
     <Table columns={columns} dataSource={State.orders} rowKey={uuidv4()} />
