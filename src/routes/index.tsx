@@ -11,6 +11,7 @@ import AdminLayout from "../layouts/AdminLayout";
 import ProductsManagement from "../pages/ProductsManagement";
 import StockPrice from "../pages/StockPrice";
 import Orders from "../pages/orders";
+import NotFound from "../pages/notfound";
 
 const AppRoutes = () => {
   return (
@@ -23,6 +24,7 @@ const AppRoutes = () => {
           <Route path="cart" element={<Cart />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="redirect" element={<Redirect />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
         <Route path="login" element={<Login />} />
         <Route element={<AdminLayout />}>
