@@ -1,4 +1,4 @@
-import { Badge, Avatar } from "antd";
+import { Badge } from "antd";
 import {
   UserOutlined,
   HeartOutlined,

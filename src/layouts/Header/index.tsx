@@ -1,6 +1,6 @@
 import { Layout, Col, Row } from "antd";
 import { NavLink } from "react-router-dom";
-import Nav from "./components/Nav";
+import Nav from "./components/nav";
 import Logo from "../../assets/images/logo.png";
 import Icons from "./components/Icons";
 import SearchBar from "./components/SearchBar";

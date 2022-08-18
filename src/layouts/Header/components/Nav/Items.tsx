@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { styles } from "./styles";
+import { styles } from "./styles"
 
 export const items = [
   {
