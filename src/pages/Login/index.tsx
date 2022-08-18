@@ -1,8 +1,12 @@
 import { Button, Form, Input } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
+  let navigate = useNavigate();
   const onFinish = (values: any) => {
-    console.log("Success:", values);
+    if (values.username === "admin" && values.password === "admin")
+      navigate("/admin/products", { replace: true });
+    else alert("Wrong UserName or Password");
   };
 
   const onFinishFailed = (errorInfo: any) => {
