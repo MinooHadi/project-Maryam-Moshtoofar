@@ -1,3 +1,4 @@
+import { Badge, Avatar } from "antd";
 import {
   UserOutlined,
   HeartOutlined,
@@ -5,20 +6,29 @@ import {
 } from "@ant-design/icons";
 
 import { NavLink } from "react-router-dom";
+import { styles } from "./styles";
+
+// const styles = { backgroundColor: "#53A16E", color: "black" };
 
 const Icons = () => {
   return (
-    <>
+    <div style={styles.iconsContainer}>
       <NavLink to="#">
-        <UserOutlined />
+        <Badge count={0}>
+          <UserOutlined style={styles.icon} />
+        </Badge>
       </NavLink>
       <NavLink to="#">
-        <HeartOutlined />
+        <Badge count={2} style={styles.badge}>
+          <HeartOutlined style={styles.icon} />
+        </Badge>
       </NavLink>
       <NavLink to="cart">
-        <ShoppingOutlined />
+        <Badge count={3} style={styles.badge}>
+          <ShoppingOutlined style={styles.icon} />
+        </Badge>
       </NavLink>
-    </>
+    </div>
   );
 };
 

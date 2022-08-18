@@ -1,14 +1,9 @@
 import { items } from "./Items";
 import { Menu } from "antd";
+import { styles } from "./styles";
 
 const Nav: React.FC = () => {
-  return (
-    <Menu
-      style={{ backgroundColor: "transparent" }}
-      items={items}
-      mode="horizontal"
-    />
-  );
+  return <Menu items={items} mode="horizontal" style={styles.menu} />;
 };
 
 export default Nav;

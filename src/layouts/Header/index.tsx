@@ -4,21 +4,13 @@ import Nav from "./components/Nav";
 import Logo from "../../assets/images/logo.png";
 import Icons from "./components/Icons";
 import SearchBar from "./components/SearchBar";
+import { styles } from "./styles";
 
 const { Header } = Layout;
 
 const UserHeader: React.FC = () => {
   return (
-    <Header
-      className="site-layout-sub-header-background"
-      style={{
-        position: "fixed",
-        zIndex: 1,
-        width: "100%",
-        padding: "0",
-        backgroundColor: "transparent",
-      }}
-    >
+    <Header style={styles.header}>
       <Row className="Row">
         <Col className="span" span={4}>
           <NavLink to="/">

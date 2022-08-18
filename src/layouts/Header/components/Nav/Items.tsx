@@ -1,17 +1,26 @@
 import { NavLink } from "react-router-dom";
+import { styles } from "./styles";
 
 export const items = [
   {
-    label: <NavLink to="/">خانه</NavLink>,
-    key: "item-0",
+    label: (
+      <NavLink style={styles.link} to="/">
+        خانه
+      </NavLink>
+    ),
+    key: "home",
   },
   {
-    label: <NavLink to="login">مدیریت</NavLink>,
-    key: "item-1",
+    label: (
+      <NavLink style={styles.link} to="login">
+        مدیریت
+      </NavLink>
+    ),
+    key: "login",
   },
   {
     label: "دسته بندی",
-    key: "item-2",
+    key: "cat",
     children: [
       {
         label: <NavLink to="category-ground-beans">پودر و دانه قهوه</NavLink>,
@@ -36,21 +45,21 @@ export const items = [
   { label: "بلاگ", key: "item-3", disabled: true },
   {
     label: "صفحات",
-    key: "item-4",
+    key: "pages",
     children: [
       {
         label: "درباره ما",
-        key: "page:1",
+        key: "page-1",
         disabled: true,
       },
       {
         label: "تماس با ما",
-        key: "page:2",
+        key: "page-2",
         disabled: true,
       },
       {
         label: "سوالات متداول",
-        key: "page:3",
+        key: "page-3",
         disabled: true,
       },
     ],

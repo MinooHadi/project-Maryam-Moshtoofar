@@ -7,9 +7,14 @@ const { Content, Footer } = Layout;
 const MainLayout: React.FC = () => {
   return (
     <>
-      <Layout>
+      <Layout style={{ backgroundColor: "green" }}>
         <UserHeader />
-        <Content style={{ padding: "0 50px", marginTop: 64 }}>
+        <Content
+          style={{
+            padding: "0 50px",
+            marginTop: 154,
+          }}
+        >
           <Outlet />
         </Content>
         <Footer>footer</Footer>
