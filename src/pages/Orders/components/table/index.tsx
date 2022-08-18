@@ -2,13 +2,7 @@ import { Space, Table, Tag } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import React from "react";
 
-interface DataType {
-  key: string;
-  name: string;
-  age: number;
-  address: string;
-  tags: string[];
-}
+
 
 const columns: ColumnsType<DataType> = [
   {
