@@ -1,58 +1,23 @@
-import { Space, Table, Tag } from "antd";
-import type { ColumnsType } from "antd/es/table";
-import React from "react";
-
-
-
-const columns: ColumnsType<DataType> = [
-  {
-    title: "نام کاربر",
-    dataIndex: "name",
-    key: "name",
-  },
-  {
-    title: "مجموع مبلغ",
-    dataIndex: "age",
-    key: "age",
-  },
-  {
-    title: "زمان ثبت سفارش",
-    dataIndex: "address",
-    key: "address",
-  },
-  {
-    title: "عملیات",
-    key: "action",
-    render: () => <a>بررسی سفارش</a>,
-  },
-];
-
-const data: DataType[] = [
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
-  },
-  {
-    key: "2",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"],
-  },
-  {
-    key: "3",
-    name: "Joe Black",
-    age: 32,
-    address: "Sidney No. 1 Lake Park",
-    tags: ["cool", "teacher"],
-  },
-];
+import { Table } from "antd";
+import { columns } from "./columns";
+import { useEffect } from "react";
+import {
+  useAppSelector,
+  useAppDispatch,
+} from "../../../../redux/features/hooks";
+import { fetchOrders } from "../../../../redux/features/orders/ordersSlice";
+import { v4 as uuidv4 } from "uuid";
 
 const OrdersTable: React.FC = () => {
-  return <Table columns={columns} dataSource={data} />;
+  const State = useAppSelector((state) => state.orders);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchOrders());
+  });
+
+  return (
+    <Table columns={columns} dataSource={State.orders} rowKey={uuidv4()} />
+  );
 };
 
 export default OrdersTable;
