@@ -1,6 +1,6 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
-
+const { Title } = Typography;
 const Login: React.FC = () => {
   let navigate = useNavigate();
   const onFinish = (values: any) => {
@@ -15,6 +15,7 @@ const Login: React.FC = () => {
 
   return (
     <div className="formContainer">
+      <Title>ورود به پنل مدیریت فروشگاه</Title>
       <Form
         name="basic"
         labelCol={{ span: 8 }}
