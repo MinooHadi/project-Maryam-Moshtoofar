@@ -4,13 +4,13 @@ import Nav from "./components/nav";
 import Logo from "../../assets/images/logo.png";
 import Icons from "./components/Icons";
 import SearchBar from "./components/SearchBar";
-import { styles } from "./styles";
+
 
 const { Header } = Layout;
 
 const UserHeader: React.FC = () => {
   return (
-    <Header style={styles.header}>
+    <Header className="userHeader">
       <Row className="Row">
         <Col className="span" span={4}>
           <NavLink to="/">

@@ -26,7 +26,7 @@ const Filters: React.FC = () => {
   };
 
   return (
-    <Row>
+    <Row className="addProduct">
       <Col>
         <Title>مدیریت سفارشات</Title>
       </Col>

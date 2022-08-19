@@ -2,7 +2,7 @@ import { Typography, Row, Col, Button } from "antd";
 const { Title } = Typography;
 const SaveChanges: React.FC = () => {
   return (
-    <Row>
+    <Row className="addProduct">
       <Col>
         <Title>مدیریت موجودی و قیمت ها</Title>
       </Col>

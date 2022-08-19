@@ -2,12 +2,12 @@ import { Typography, Row, Col, Button } from "antd";
 const { Title } = Typography;
 const AddProduct: React.FC = () => {
   return (
-    <Row>
+    <Row className="addProduct">
       <Col>
         <Title>مدیریت کالاها</Title>
       </Col>
       <Col>
-        <Button>افزودن کالا</Button>
+        <Button className="addbtn" type="primary">افزودن کالا</Button>
       </Col>
     </Row>
   );
