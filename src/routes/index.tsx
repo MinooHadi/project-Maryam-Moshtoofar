@@ -9,7 +9,7 @@ import Redirect from "../pages/Redirect";
 import Login from "../pages/login";
 import AdminLayout from "../layouts/AdminLayout";
 import ProductsManagement from "../pages/ProductsManagement";
-import StockPrice from "../pages/StockPrice";
+import StockPrice from "../pages/stockPrice";
 import Orders from "../pages/orders";
 import NotFound from "../pages/notfound";
 

@@ -1,4 +1,4 @@
-import { Order } from "../../../../types";
+
 export const columns = [
   {
     title: "نام کاربر",

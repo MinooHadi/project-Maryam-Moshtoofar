@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchAllOrdersRequest } from "../../../api/orders";
 import { OrdersState } from "../../../types";
 

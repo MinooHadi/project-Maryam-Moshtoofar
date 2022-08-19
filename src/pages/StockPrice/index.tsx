@@ -1,5 +1,13 @@
-const StockPrice: React.FC = () => {
-  return <div>StockPrice</div>;
+import SaveChanges from "./components/saveChanges";
+import StockPriceTable from "./components/table";
+
+const ProductsManagement: React.FC = () => {
+  return (
+    <>
+      <SaveChanges />
+      <StockPriceTable />
+    </>
+  );
 };
 
-export default StockPrice;
+export default ProductsManagement;
