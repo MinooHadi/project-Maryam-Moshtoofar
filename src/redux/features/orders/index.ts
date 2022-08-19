@@ -18,10 +18,10 @@ export const ordersSlice = createSlice({
   initialState,
   reducers: {
     deliveredOrders(state) {
-    state.orders = state.orders.filter((order) => order.delivered === true)
+      state.orders = state.orders.filter((order) => order.delivered);
     },
     pendingOrders(state) {
-      state.orders = state.orders.filter((order) => order.delivered === false)
+      state.orders = state.orders.filter((order) => !order.delivered);
     },
   },
   extraReducers: (builder) => {

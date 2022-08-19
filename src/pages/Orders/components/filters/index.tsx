@@ -11,7 +11,8 @@ const { Title } = Typography;
 
 const Filters: React.FC = () => {
   const dispatch = useAppDispatch();
-  const handleChange = (val: number) => {
+  const handleChange = (e: any, val: number) => {
+    e.preventDefault();
     switch (val) {
       case 1:
         dispatch(fetchOrders());
@@ -32,13 +33,13 @@ const Filters: React.FC = () => {
       </Col>
       <Col>
         <Radio.Group>
-          <Radio value={1} onClick={() => handleChange(1)}>
+          <Radio value={1} onClick={(e) => handleChange(e, 1)}>
             همه
           </Radio>
-          <Radio value={2} onClick={() => handleChange(2)}>
+          <Radio value={2} onClick={(e) => handleChange(e, 2)}>
             سفارش های تحویل شده
           </Radio>
-          <Radio value={3} onClick={() => handleChange(3)}>
+          <Radio value={3} onClick={(e) => handleChange(e, 3)}>
             سفارش های در انتظار ارسال
           </Radio>
         </Radio.Group>

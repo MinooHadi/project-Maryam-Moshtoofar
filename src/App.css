@@ -3,10 +3,12 @@
 
 .formContainer {
   display: flex;
+  flex-direction: column;
+  gap: 50px;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  padding-top: 100px;
+  padding-top: 10px;
   background-color: rgb(196, 196, 196, 0.5);
 }
 
