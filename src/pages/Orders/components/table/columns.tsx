@@ -1,3 +1,4 @@
+import { Order } from "../../../../types";
 export const columns = [
   {
     title: "نام کاربر",
@@ -18,5 +19,11 @@ export const columns = [
     title: "عملیات",
     key: "action",
     render: () => <a>بررسی سفارش</a>,
+  },
+
+  {
+    title: "stats",
+    dataIndex: "delivered",
+    key: "delivered",
   },
 ];

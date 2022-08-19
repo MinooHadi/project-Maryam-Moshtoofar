@@ -1,12 +1,12 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import { fetchAllOrdersRequest } from "../../../api/orders";
-import { Orders } from "../../../types";
+import { OrdersState } from "../../../types";
 
 const initialState = {
   orders: [],
   loading: "idle",
   error: "",
-} as Orders;
+} as OrdersState;
 
 export const fetchOrders = createAsyncThunk(
   "orders/fetchPosts",
@@ -17,7 +17,12 @@ export const ordersSlice = createSlice({
   name: "orders",
   initialState,
   reducers: {
-    // reducer is required for typescript
+    deliveredOrders(state) {
+    state.orders = state.orders.filter((order) => order.delivered === true)
+    },
+    pendingOrders(state) {
+      state.orders = state.orders.filter((order) => order.delivered === false)
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchOrders.pending, (state) => {
@@ -31,5 +36,5 @@ export const ordersSlice = createSlice({
     });
   },
 });
-
+export const { deliveredOrders, pendingOrders } = ordersSlice.actions;
 export default ordersSlice.reducer;

@@ -5,8 +5,7 @@ import {
   useAppSelector,
   useAppDispatch,
 } from "../../../../redux/features/hooks";
-import { fetchOrders } from "../../../../redux/features/orders/ordersSlice";
-import { v4 as uuidv4 } from "uuid";
+import { fetchOrders } from "../../../../redux/features/orders";
 
 const OrdersTable: React.FC = () => {
   const State = useAppSelector((state) => state.orders);
@@ -16,7 +15,11 @@ const OrdersTable: React.FC = () => {
   }, []);
 
   return (
-    <Table columns={columns} dataSource={State.orders} rowKey={uuidv4()} />
+    <Table
+      columns={columns}
+      dataSource={State.orders}
+      rowKey="id"
+    />
   );
 };
 

@@ -1,12 +1,13 @@
 import store from "../redux/store";
 
 export type Order = {
-  key: string;
+  id: string;
   name: string;
   address: string;
   phone: string;
   expectAt: string;
   createdAt: string;
+  delivered: boolean;
   products: [
     {
       id: string;
@@ -18,7 +19,7 @@ export type Order = {
   ];
 };
 
-export type Orders = {
+export type OrdersState = {
   orders: Order[];
   loading: "idle" | "pending" | "succeeded" | "failed";
   error: string;
