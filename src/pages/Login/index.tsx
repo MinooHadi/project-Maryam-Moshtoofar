@@ -1,12 +1,13 @@
 import { Button, Form, Input, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
+import { validationRules } from "./validation";
 const { Title } = Typography;
+
 const Login: React.FC = () => {
   let navigate = useNavigate();
-  const onFinish = (values: any) => {
-    if (values.username === "admin" && values.password === "admin")
-      navigate("/admin/products", { replace: true });
-    else alert("Wrong UserName or Password");
+
+  const onFinish = () => {
+    navigate("/admin/products", { replace: true });
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -29,15 +30,14 @@ const Login: React.FC = () => {
         <Form.Item
           label="نام کاربری"
           name="username"
-          rules={[{ required: true, message: "نام کاربری الزامی است" }]}
+          rules={validationRules.userName}
         >
           <Input />
         </Form.Item>
-
         <Form.Item
           label="رمز عبور"
           name="password"
-          rules={[{ required: true, message: "رمز عبور الزامی است" }]}
+          rules={validationRules.password}
         >
           <Input.Password />
         </Form.Item>
