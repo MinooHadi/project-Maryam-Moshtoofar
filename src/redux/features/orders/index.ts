@@ -1,16 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchAllOrdersRequest } from "../../../api/orders";
+import { fetchPagedOrdersRequest } from "../../../api/orders";
 import { OrdersState } from "../../../types";
 
 const initialState = {
   orders: [],
+  ordersCount: 0,
   loading: "idle",
   error: "",
 } as OrdersState;
 
 export const fetchOrders = createAsyncThunk(
   "orders/fetchPosts",
-  fetchAllOrdersRequest
+  fetchPagedOrdersRequest
 );
 
 export const ordersSlice = createSlice({
@@ -29,10 +30,21 @@ export const ordersSlice = createSlice({
       return { ...state, loading: "pending" };
     });
     builder.addCase(fetchOrders.fulfilled, (state, action) => {
-      return { ...state, loading: "succeeded", orders: action.payload };
+      const { orders, count } = action.payload;
+      return {
+        ...state,
+        loading: "succeeded",
+        orders: orders,
+        ordersCount: count,
+      };
     });
-    builder.addCase(fetchOrders.rejected, (_state, action) => {
-      return { orders: [], loading: "failed", error: String(action.payload) };
+    builder.addCase(fetchOrders.rejected, (state, action) => {
+      return {
+        ...state,
+        orders: [],
+        loading: "failed",
+        error: String(action.payload),
+      };
     });
   },
 });

@@ -31,6 +31,10 @@ export type Order = {
   ];
 };
 
+export type OrderData = {
+  totalOrdersCount: number;
+  ordersList: Order[];
+};
 
 export type Category = {
   id: number;
@@ -40,12 +44,14 @@ export type Category = {
 
 export type OrdersState = {
   orders: Order[];
+  ordersCount: number;
   loading: "idle" | "pending" | "succeeded" | "failed";
   error: string;
 };
 
 export type ProductsState = {
   products: Product[];
+  productsCount: number;
   loading: "idle" | "pending" | "succeeded" | "failed";
   error: string;
 };

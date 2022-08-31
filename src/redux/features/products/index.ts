@@ -1,16 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchAllProductsRequest } from "../../../api/products";
+import { fetchPagedProductsRequest } from "../../../api/products";
 import { ProductsState } from "../../../types";
 
 const initialState = {
   products: [],
+  productsCount: 0,
   loading: "idle",
   error: "",
 } as ProductsState;
 
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
-  fetchAllProductsRequest
+  fetchPagedProductsRequest
 );
 
 export const productsSlice = createSlice({
@@ -22,10 +23,21 @@ export const productsSlice = createSlice({
       return { ...state, loading: "pending" };
     });
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
-      return { ...state, loading: "succeeded", products: action.payload };
+      const { products, count } = action.payload;
+      return {
+        ...state,
+        loading: "succeeded",
+        products: products,
+        productsCount: count,
+      };
     });
-    builder.addCase(fetchProducts.rejected, (_state, action) => {
-      return { products: [], loading: "failed", error: String(action.payload) };
+    builder.addCase(fetchProducts.rejected, (state, action) => {
+      return {
+        ...state,
+        products: [],
+        loading: "failed",
+        error: String(action.payload),
+      };
     });
   },
 });

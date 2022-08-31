@@ -6,19 +6,27 @@ import {
   useAppDispatch,
 } from "../../../../redux/features/hooks";
 import { fetchOrders } from "../../../../redux/features/orders";
+import { usePagination } from "../../../../hooks";
 
 const OrdersTable: React.FC = () => {
-  const State = useAppSelector((state) => state.orders);
+  const state = useAppSelector((state) => state.orders);
+  let count = useAppSelector((state) => state.orders.ordersCount);
+
   const dispatch = useAppDispatch();
+
+  // Pagination
+  const { params, pagination } = usePagination(count);
+
   useEffect(() => {
-    dispatch(fetchOrders());
-  }, []);
+    dispatch(fetchOrders(params));
+  }, [params]);
 
   return (
     <Table
       columns={columns}
-      dataSource={State.orders}
+      dataSource={state.orders}
       rowKey="id"
+      pagination={pagination}
     />
   );
 };

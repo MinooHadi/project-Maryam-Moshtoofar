@@ -1,5 +1,7 @@
 import { Button, Form, Input, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
+import { PRODUCTS_MANAGEMENT_ROUTE } from "../../config/routes";
+import { params } from "../../config/variables";
 import { validationRules } from "./validation";
 const { Title } = Typography;
 
@@ -7,7 +9,7 @@ const Login: React.FC = () => {
   let navigate = useNavigate();
 
   const onFinish = () => {
-    navigate("/admin/products", { replace: true });
+    navigate(`${PRODUCTS_MANAGEMENT_ROUTE}${params}`, { replace: true });
   };
 
   const onFinishFailed = (errorInfo: any) => {

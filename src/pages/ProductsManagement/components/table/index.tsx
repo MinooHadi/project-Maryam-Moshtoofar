@@ -6,16 +6,29 @@ import {
   useAppDispatch,
 } from "../../../../redux/features/hooks";
 import { fetchProducts } from "../../../../redux/features/products";
+import { usePagination } from "../../../../hooks";
+
 const ProductTable: React.FC = () => {
   const productsState = useAppSelector((state) => state.products);
   const categoriesState = useAppSelector((state) => state.categories);
+  let count = useAppSelector((state) => state.products.productsCount);
   const tableData = [productsState.products, categoriesState.categories];
+
   const dispatch = useAppDispatch();
+
+  // Pagination
+  const { params, pagination } = usePagination(count);
+
   useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
+    dispatch(fetchProducts(params));
+  }, [params]);
   return (
-    <Table columns={columns} dataSource={productsState.products} rowKey="id" />
+    <Table
+      pagination={pagination}
+      columns={columns}
+      dataSource={productsState.products}
+      rowKey="id"
+    />
   );
 };
 

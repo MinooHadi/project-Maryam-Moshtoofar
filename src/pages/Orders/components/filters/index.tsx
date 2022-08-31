@@ -15,13 +15,13 @@ const Filters: React.FC = () => {
     e.preventDefault();
     switch (val) {
       case 1:
-        dispatch(fetchOrders());
+        // dispatch(fetchOrders());
         break;
       case 2:
-        dispatch(deliveredOrders());
+        // dispatch(deliveredOrders());
         break;
       case 3:
-        dispatch(pendingOrders());
+        // dispatch(pendingOrders());
         break;
     }
   };
