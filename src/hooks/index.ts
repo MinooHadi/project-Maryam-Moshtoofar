@@ -1,14 +1,22 @@
 import { useSearchParams } from "react-router-dom";
+import { ParamObject } from "../types";
 
-export const usePagination = (count?: number) => {
+export const usePagination = (count?: number, newParams?: string) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log([...searchParams]);
 
   const handlePageChange = (page: number) => {
-    setSearchParams({
+    let paramObj: ParamObject = {
       _page: `${page}`,
       _limit: `${searchParams.get("_limit")}`,
-    });
+    };
+    if (newParams) {
+      paramObj = {
+        _page: `${page}`,
+        _limit: `${searchParams.get("_limit")}`,
+        delivered: newParams,
+      };
+    }
+    setSearchParams(paramObj);
   };
 
   const pagination = {

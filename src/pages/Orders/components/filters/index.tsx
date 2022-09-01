@@ -1,29 +1,52 @@
 import { Typography, Row, Col } from "antd";
 import { Radio } from "antd";
-import { useAppDispatch } from "../../../../redux/features/hooks";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { usePagination } from "../../../../hooks";
 import {
-  deliveredOrders,
-  fetchOrders,
-  pendingOrders,
-} from "../../../../redux/features/orders";
+  useAppDispatch,
+  useAppSelector,
+} from "../../../../redux/features/hooks";
+import { fetchOrders } from "../../../../redux/features/orders";
 
 const { Title } = Typography;
 
 const Filters: React.FC = () => {
+  const { orders } = useAppSelector((state) => state.orders);
+  const [showAll, setShowAll] = useState(true);
+  const [newParams, setNewParams] = useState(`?_page=1&_limit=5`);
+
+  const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useAppDispatch();
-  const handleChange = (e: any, val: number) => {
+
+  useEffect(() => {
+    if (searchParams.has("delivered")) {
+      searchParams.delete("delivered");
+      setSearchParams(searchParams);
+    }
+  }, [showAll]);
+
+  useEffect(() => {
+    dispatch(fetchOrders(newParams));
+  }, [newParams]);
+
+  const handleChange = (e: any) => {
     e.preventDefault();
-    switch (val) {
-      case 1:
-        // dispatch(fetchOrders());
+    let updatedSearchParams = new URLSearchParams(searchParams.toString());
+
+    switch (e.target.value) {
+      case "all":
+        setShowAll((prev) => !prev);
         break;
-      case 2:
-        // dispatch(deliveredOrders());
+      case "delivered":
+        updatedSearchParams.set("delivered", "true");
         break;
-      case 3:
-        // dispatch(pendingOrders());
+      case "pending":
+        updatedSearchParams.set("delivered", "false");
         break;
     }
+    setSearchParams(updatedSearchParams.toString());
+    setNewParams(`?${searchParams.toString()}`);
   };
 
   return (
@@ -32,14 +55,14 @@ const Filters: React.FC = () => {
         <Title>مدیریت سفارشات</Title>
       </Col>
       <Col>
-        <Radio.Group>
-          <Radio value={1} onClick={(e) => handleChange(e, 1)}>
+        <Radio.Group defaultValue={"all"}>
+          <Radio value={"all"} onClick={(e) => handleChange(e)}>
             همه
           </Radio>
-          <Radio value={2} onClick={(e) => handleChange(e, 2)}>
+          <Radio value={"delivered"} onClick={(e) => handleChange(e)}>
             سفارش های تحویل شده
           </Radio>
-          <Radio value={3} onClick={(e) => handleChange(e, 3)}>
+          <Radio value={"pending"} onClick={(e) => handleChange(e)}>
             سفارش های در انتظار ارسال
           </Radio>
         </Radio.Group>

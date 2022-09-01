@@ -64,3 +64,10 @@ export type CategoriesState = {
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+
+
+export type ParamObject = {
+  _page: string;
+  _limit: string;
+  delivered?: string;
+};
