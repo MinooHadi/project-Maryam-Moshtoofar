@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import store from "../redux/store";
 
 export type Product = {
@@ -65,9 +66,13 @@ export type CategoriesState = {
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
-
 export type ParamObject = {
   _page: string;
   _limit: string;
   delivered?: string;
+};
+
+export type AdminHeaderProps = {
+  showModal: boolean;
+  setShowModal: Dispatch<SetStateAction<boolean>>;
 };

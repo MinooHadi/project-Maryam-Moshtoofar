@@ -1,10 +1,10 @@
-import AddProduct from "./components/addProduct";
+import ProductHeader from "./components/header";
 import ProductTable from "./components/table";
 
 const ProductsManagement: React.FC = () => {
   return (
     <>
-      <AddProduct />
+      <ProductHeader />
       <ProductTable />
     </>
   );
