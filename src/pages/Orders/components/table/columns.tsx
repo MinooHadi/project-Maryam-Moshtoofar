@@ -41,21 +41,3 @@ export const columns: ColumnsType<Order> = [
   },
 ];
 
-// export type Order = {
-//   id: string;
-//   name: string;
-//   address: string;
-//   phone: string;
-//   expectAt: string;
-//   createdAt: string;
-//   delivered: boolean;
-//   products: [
-//     {
-//       id: string;
-//       name: string;
-//       count: number;
-//       price: number;
-//       image: string;
-//     }
-//   ];
-// };

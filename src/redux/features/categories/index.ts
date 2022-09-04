@@ -4,7 +4,7 @@ import { CategoriesState } from "../../../types";
 
 const initialState = {
   categories: [],
-  loading: "idle",
+  loading: false,
   error: "",
 } as CategoriesState;
 
@@ -19,15 +19,15 @@ export const categoriesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchCategories.pending, (state) => {
-      return { ...state, loading: "pending" };
+      return { ...state, loading: true };
     });
     builder.addCase(fetchCategories.fulfilled, (state, action) => {
-      return { ...state, loading: "succeeded", categories: action.payload };
+      return { ...state, loading: false, categories: action.payload };
     });
     builder.addCase(fetchCategories.rejected, (_state, action) => {
       return {
         categories: [],
-        loading: "failed",
+        loading: false,
         error: String(action.payload),
       };
     });

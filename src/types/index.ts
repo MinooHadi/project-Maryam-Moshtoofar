@@ -70,7 +70,7 @@ export type ProductsState = {
 
 export type CategoriesState = {
   categories: Category[];
-  loading: "idle" | "pending" | "succeeded" | "failed";
+  loading: boolean;
   error: string;
 };
 
