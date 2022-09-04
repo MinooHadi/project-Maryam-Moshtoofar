@@ -25,9 +25,6 @@ const OrdersTable: React.FC = () => {
     filters: Record<string, FilterValue | null>,
     sorter: SorterResult<Order> | SorterResult<Order[]>
   ) => {
-
-console.log(filters);
-
     dispatch(
       fetchOrders({
         pagination: newPagination,
@@ -40,7 +37,6 @@ console.log(filters);
       })
     );
   };
-
   return (
     <>
       <Table

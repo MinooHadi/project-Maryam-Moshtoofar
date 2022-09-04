@@ -5,8 +5,16 @@ import { ProductsState } from "../../../types";
 const initialState = {
   products: [],
   productsCount: 0,
-  loading: "idle",
+  loading: false,
   error: "",
+  queryParams: {
+    pagination: {
+      current: 1,
+      pageSize: 5,
+    },
+    sortField: undefined,
+    sortOrder: undefined,
+  },
 } as ProductsState;
 
 export const fetchProducts = createAsyncThunk(
@@ -20,22 +28,30 @@ export const productsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.pending, (state) => {
-      return { ...state, loading: "pending" };
+      return { ...state, loading: true };
     });
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
-      const { products, count } = action.payload;
+      const { products, count, queryParams } = action.payload;
       return {
         ...state,
-        loading: "succeeded",
+        loading: false,
         products: products,
-        productsCount: count,
+        queryParams: {
+          pagination: {
+            current: queryParams.pagination?.current,
+            pageSize: queryParams.pagination?.pageSize,
+            total: count,
+          },
+          sortField: queryParams.sortField,
+          sortOrder: queryParams.sortOrder,
+        },
       };
     });
     builder.addCase(fetchProducts.rejected, (state, action) => {
       return {
         ...state,
         products: [],
-        loading: "failed",
+        loading: false,
         error: String(action.payload),
       };
     });

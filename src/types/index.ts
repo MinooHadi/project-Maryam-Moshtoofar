@@ -59,8 +59,13 @@ export type OrdersState = {
 export type ProductsState = {
   products: Product[];
   productsCount: number;
-  loading: "idle" | "pending" | "succeeded" | "failed";
+  loading: boolean;
   error: string;
+  queryParams: {
+    pagination: TablePaginationConfig;
+    sortField: string | undefined;
+    sortOrder: string | undefined;
+  };
 };
 
 export type CategoriesState = {
