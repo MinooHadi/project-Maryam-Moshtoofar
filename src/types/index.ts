@@ -1,5 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import store from "../redux/store";
+import type { TablePaginationConfig } from "antd/es/table";
+import type { SorterResult } from "antd/es/table/interface";
 
 export type Product = {
   id: number;
@@ -20,7 +22,7 @@ export type Order = {
   phone: string;
   expectAt: string;
   createdAt: string;
-  delivered: boolean;
+  delivered: string;
   products: [
     {
       id: string;
@@ -45,9 +47,13 @@ export type Category = {
 
 export type OrdersState = {
   orders: Order[];
-  ordersCount: number;
-  loading: "idle" | "pending" | "succeeded" | "failed";
+  loading: boolean;
   error: string;
+  queryParams: {
+    pagination: TablePaginationConfig;
+    sortField: string | undefined;
+    sortOrder: string | undefined;
+  };
 };
 
 export type ProductsState = {
@@ -66,13 +72,26 @@ export type CategoriesState = {
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
-export type ParamObject = {
-  _page: string;
-  _limit: string;
-  delivered?: string;
-};
-
 export type AdminHeaderProps = {
   showModal: boolean;
   setShowModal: Dispatch<SetStateAction<boolean>>;
 };
+
+export interface Params {
+  pagination?: TablePaginationConfig;
+  sorter?: SorterResult<any> | SorterResult<any>[];
+  total?: number;
+  sortField?: string;
+  sortOrder?: string;
+  delivered?: string[];
+}
+
+//   queryParams: {
+
+//   };
+//   pagination?: TablePaginationConfig;
+//   sorter?: SorterResult<any> | SorterResult<any>[];
+//   total?: number;
+//   sortField?: string;
+//   sortOrder?: string;
+// }

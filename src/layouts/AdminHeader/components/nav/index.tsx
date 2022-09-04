@@ -5,24 +5,23 @@ import {
   PRODUCTS_MANAGEMENT_ROUTE,
   STOCK_PRICE_ROUTE,
 } from "../../../../config/routes";
-import { params } from "../../../../config/variables";
 
 const Nav: React.FC = () => {
   const items = [
     {
       label: (
-        <NavLink to={`${PRODUCTS_MANAGEMENT_ROUTE}${params}`}>کالاها</NavLink>
+        <NavLink to={`${PRODUCTS_MANAGEMENT_ROUTE}`}>کالاها</NavLink>
       ),
       key: "1",
     },
     {
       label: (
-        <NavLink to={`${STOCK_PRICE_ROUTE}${params}`}>موجودی و قیمت ها</NavLink>
+        <NavLink to={`${STOCK_PRICE_ROUTE}`}>موجودی و قیمت ها</NavLink>
       ),
       key: "2",
     },
     {
-      label: <NavLink to={`${ORDERS_ROUTE}${params}`}> سفارشات </NavLink>,
+      label: <NavLink to={`${ORDERS_ROUTE}`}> سفارشات </NavLink>,
       key: "3",
     },
   ];

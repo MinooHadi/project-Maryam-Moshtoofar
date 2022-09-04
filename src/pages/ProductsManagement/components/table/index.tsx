@@ -6,7 +6,6 @@ import {
   useAppDispatch,
 } from "../../../../redux/features/hooks";
 import { fetchProducts } from "../../../../redux/features/products";
-import { usePagination } from "../../../../hooks";
 
 const ProductTable: React.FC = () => {
   const productsState = useAppSelector((state) => state.products);
@@ -17,14 +16,9 @@ const ProductTable: React.FC = () => {
   const dispatch = useAppDispatch();
 
   // Pagination
-  const { params, pagination } = usePagination(count);
 
-  useEffect(() => {
-    dispatch(fetchProducts(params));
-  }, [params]);
   return (
     <Table
-      pagination={pagination}
       columns={columns}
       dataSource={productsState.products}
       rowKey="id"

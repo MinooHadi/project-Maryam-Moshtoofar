@@ -1,9 +1,9 @@
-import Filters from "./components/filters";
+import { Typography } from "antd";
 import OrdersTable from "./components/table";
 const Orders: React.FC = () => {
   return (
     <>
-      <Filters />
+      <Typography.Title> مدیریت سفارشات</Typography.Title>
       <OrdersTable />
     </>
   );
