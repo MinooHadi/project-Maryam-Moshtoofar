@@ -1,5 +1,5 @@
 import { Table, TablePaginationConfig } from "antd";
-
+import convertToPersian from "num-to-persian";
 import { useEffect } from "react";
 import {
   useAppSelector,
@@ -9,6 +9,7 @@ import { fetchProducts } from "../../../../redux/features/products";
 import { FilterValue, SorterResult } from "antd/lib/table/interface";
 import { Product } from "../../../../types";
 import { BASE_URL } from "../../../../config/api";
+import React from "react";
 
 const ProductTable: React.FC = () => {
   const state = useAppSelector((state) => state.products);
@@ -41,6 +42,10 @@ const ProductTable: React.FC = () => {
       title: "قیمت",
       dataIndex: "price",
       key: "price",
+      render: (text: any) =>
+        convertToPersian(
+          text.toLocaleString("fa-IR", { maximumFractionDigits: 2 })
+        ),
     },
     {
       title: "دسته بندی",
@@ -53,6 +58,7 @@ const ProductTable: React.FC = () => {
       title: "موجودی",
       dataIndex: "quantity",
       key: "quantity",
+      render: (text: string) => convertToPersian(text),
     },
   ];
   const dispatch = useAppDispatch();

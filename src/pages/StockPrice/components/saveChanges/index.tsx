@@ -1,4 +1,5 @@
 import { Typography, Row, Col, Button } from "antd";
+import React from "react";
 const { Title } = Typography;
 const SaveChanges: React.FC = () => {
   return (
