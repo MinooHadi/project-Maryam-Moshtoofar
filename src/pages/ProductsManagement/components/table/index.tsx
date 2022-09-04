@@ -14,7 +14,6 @@ const ProductTable: React.FC = () => {
   const categoriesState = useAppSelector((state) => state.categories);
   const queryParams = useAppSelector((state) => state.products.queryParams);
   const loading = useAppSelector((state) => state.products.loading);
-  let count = useAppSelector((state) => state.products.productsCount);
   const tableData = [state.products, categoriesState.categories];
 
   const dispatch = useAppDispatch();

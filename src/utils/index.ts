@@ -1,3 +1,4 @@
+
 import { Params } from "../types";
 
 export const GenerateParams = (params: Params) => {
@@ -16,5 +17,3 @@ export const GenerateParams = (params: Params) => {
 
   return queryParams;
 };
-
-// /posts?_sort=views&_order=asc
