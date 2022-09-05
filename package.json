@@ -52,6 +52,7 @@
     ]
   },
   "devDependencies": {
+    "@types/ckeditor__ckeditor5-build-classic": "^29.0.1",
     "@types/node": "^18.7.6",
     "@types/uuid": "^8.3.4"
   }
