@@ -4,7 +4,7 @@ import { ORDERS_ROUTE, } from "../../config/routes";
 import { useAppDispatch, useAppSelector } from "../../redux/features/hooks";
 import { login } from "../../redux/features/user/usersSlice";
 import { User } from "../../types";
-import { validationRules } from "./validation";
+import { loginRules } from "./validation";
 const { Title } = Typography;
 
 const Login: React.FC = () => {
@@ -33,14 +33,14 @@ const Login: React.FC = () => {
         <Form.Item
           label="نام کاربری"
           name="username"
-          rules={validationRules.userName}
+          rules={loginRules.userName}
         >
           <Input/>
         </Form.Item>
         <Form.Item
           label="رمز عبور"
           name="password"
-          rules={validationRules.password}
+          rules={loginRules.password}
         >
           <Input.Password />
         </Form.Item>

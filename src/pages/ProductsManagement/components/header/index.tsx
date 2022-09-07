@@ -1,6 +1,6 @@
 import { Typography, Row, Col, Button } from "antd";
 import { useState } from "react";
-import AddProduct from "../addProductModal";
+import AddProduct from "../addModal";
 
 const { Title } = Typography;
 

@@ -5,7 +5,7 @@ import {
   useAppSelector,
   useAppDispatch,
 } from "../../../../redux/features/hooks";
-import { fetchProducts } from "../../../../redux/features/admin/products/productsSlice";
+import { fetchProducts } from "../../../../redux/features/products";
 import { FilterValue, SorterResult } from "antd/lib/table/interface";
 import { Product } from "../../../../types";
 import { BASE_URL } from "../../../../config/api";

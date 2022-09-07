@@ -5,3 +5,4 @@ export const CATEGORIES_URL = "/category";
 export const COUNT_URL = "/total-count";
 export const LOGIN_URL = "/auth/login";
 export const REFRESH_TOKEN_URL = "/auth/refresh-token";
+export const UPLOAD_ROUTE = "http://localhost:3002/upload"
