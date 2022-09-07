@@ -1,7 +1,7 @@
 import { Table, TablePaginationConfig } from "antd";
 import { columns } from "./columns";
 import { useEffect } from "react";
-import { fetchOrders } from "../../../../redux/features/orders";
+import { fetchOrders } from "../../../../redux/features/admin/orders/OrdersSlice";
 import { FilterValue, SorterResult } from "antd/lib/table/interface";
 import { Order } from "../../../../types";
 

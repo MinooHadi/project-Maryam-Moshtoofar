@@ -1,21 +1,23 @@
 import { Button, Form, Input, Typography } from "antd";
-import { useNavigate } from "react-router-dom";
-import { PRODUCTS_MANAGEMENT_ROUTE } from "../../config/routes";
-
+import { Navigate } from "react-router-dom";
+import { ORDERS_ROUTE, } from "../../config/routes";
+import { useAppDispatch, useAppSelector } from "../../redux/features/hooks";
+import { login } from "../../redux/features/user/usersSlice";
+import { User } from "../../types";
 import { validationRules } from "./validation";
 const { Title } = Typography;
 
 const Login: React.FC = () => {
-  let navigate = useNavigate();
 
-  const onFinish = () => {
-    navigate(`${PRODUCTS_MANAGEMENT_ROUTE}`, { replace: true });
+  const dispatch = useAppDispatch()
+  const {error,isLoggedIn} = useAppSelector((state)=>state.user)
+
+  const handleSubmit = async(values:User) => {
+    dispatch(login(values))
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
-  };
-
+  if (isLoggedIn) return <Navigate to={ORDERS_ROUTE}></Navigate>
+  
   return (
     <div className="formContainer">
       <Title>ورود به پنل مدیریت فروشگاه</Title>
@@ -24,8 +26,7 @@ const Login: React.FC = () => {
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
         initialValues={{ remember: true }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
+        onFinish={(values)=>handleSubmit(values)}
         autoComplete="off"
         className="loginForm"
       >
@@ -34,7 +35,7 @@ const Login: React.FC = () => {
           name="username"
           rules={validationRules.userName}
         >
-          <Input />
+          <Input/>
         </Form.Item>
         <Form.Item
           label="رمز عبور"
@@ -49,6 +50,8 @@ const Login: React.FC = () => {
           </Button>
         </Form.Item>
       </Form>
+      {/* toast it later */}
+      <Typography>{error && (<span>{error}</span>)}</Typography>
     </div>
   );
 };

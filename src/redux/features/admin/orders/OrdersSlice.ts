@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { fetchPagedOrdersRequest } from "../../../api/orders";
-import { OrdersState } from "../../../types";
+import { fetchPagedOrdersRequest } from "../../../../api/orders";
+import { OrdersState } from "../../../../types";
 
 const initialState = {
   orders: [],

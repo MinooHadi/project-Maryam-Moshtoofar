@@ -91,12 +91,13 @@ export interface Params {
   delivered?: string[];
 }
 
-//   queryParams: {
 
-//   };
-//   pagination?: TablePaginationConfig;
-//   sorter?: SorterResult<any> | SorterResult<any>[];
-//   total?: number;
-//   sortField?: string;
-//   sortOrder?: string;
-// }
+export type LoginState = {
+  isLoggedIn:boolean
+  error: string;
+};
+
+export type User = {
+  username:string;
+  password:string
+}
