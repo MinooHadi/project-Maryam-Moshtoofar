@@ -76,10 +76,19 @@ export type CategoriesState = {
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
-export type AdminHeaderProps = {
+export type ProductManagementProps = {
+  editMode:boolean
   showModal: boolean;
   setShowModal: Dispatch<SetStateAction<boolean>>;
+  setEditMode:Dispatch<SetStateAction<boolean>>
+  modalOptions:ModalOptions,
+  setModalOptions:Dispatch<SetStateAction<ModalOptions>>
 };
+
+export type ModalOptions = {
+  modalTitle:string 
+}
+
 
 export interface Params {
   pagination?: TablePaginationConfig;

@@ -13,7 +13,7 @@ import { createProduct, fetchProducts } from '../../../../redux/features/admin/p
 const { Option } = Select;
 
 
-const AddProductForm:React.FC = () => {
+const AddProductForm = (props: any) => {
   const [form] = Form.useForm();
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [defaultFileList, setDefaultFileList] = useState([]);

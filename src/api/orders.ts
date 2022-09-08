@@ -13,11 +13,11 @@ export const fetchPagedOrdersRequest = async (params: Params = {}) => {
     const response = await axiosPrivate.get(
       `${ORDERS_URL}?${qs.stringify(GenerateParams(params))}`
     );
-    const countResponse = await axiosPrivate.get(ORDERS_COUNT_URL);
+    const {data} = await axiosPrivate.get<Order[]>(ORDERS_URL);
 
     return {
       orders: response.data,
-      count: countResponse.data.orders,
+      count: data.length,
       queryParams: params,
     };
   } catch (error) {

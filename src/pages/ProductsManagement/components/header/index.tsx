@@ -1,12 +1,14 @@
 import { Typography, Row, Col, Button } from "antd";
-import { useState } from "react";
-import AddProduct from "../addModal";
+import ProductModal from "../modal";
 
 const { Title } = Typography;
 
-const ProductHeader: React.FC = () => {
-  const [showModal, setShowModal] = useState(false);
+const ProductHeader = (props: any) => {
+const { editMode,setShowModal , setEditMode} = props
+
   const handleClick = () => {
+    console.log("add",editMode);
+    setEditMode(false)
     setShowModal(true);
   };
   return (
@@ -15,10 +17,10 @@ const ProductHeader: React.FC = () => {
         <Title>مدیریت کالاها</Title>
       </Col>
       <Col>
-        <Button className="addbtn" type="primary" onClick={handleClick}>
+        <Button type="primary" onClick={handleClick}>
           افزودن کالا
         </Button>
-        <AddProduct showModal={showModal} setShowModal={setShowModal} />
+        
       </Col>
     </Row>
   );

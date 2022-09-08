@@ -1,5 +1,4 @@
-import { Table, TablePaginationConfig ,Image} from "antd";
-
+import { Table, TablePaginationConfig ,Image, Button, Space} from "antd";
 import { useEffect } from "react";
 import {
   useAppSelector,
@@ -14,20 +13,55 @@ import {
 import { Product } from "../../../../types";
 import { fetchCategories } from "../../../../redux/features/categories";
 import { BASE_URL } from "../../../../config/api";
+import { fetchSingleProduct } from "../../../../api/products";
 
 
-const ProductTable: React.FC = () => {
+const ProductTable = (props:any) => {
+  const {editMode , setShowModal, setEditMode} = props
   const state = useAppSelector((state) => state.products);
   const categoriesState = useAppSelector((state) => state.categories);
   const queryParams = useAppSelector((state) => state.products.queryParams);
   const loading = useAppSelector((state) => state.products.loading);
   const dispatch = useAppDispatch();
   
+  useEffect(() => {
+    dispatch(fetchProducts(queryParams));
+    dispatch(fetchCategories());
+  }, []);
+
+
+
+
   const showCategory = (productCat: number) => {
     const cat = categoriesState.categories.find(
       (category) => category.id === productCat
     );
     return cat?.name;
+  };
+const handleEdit = (productID:number)=>{
+  console.log("edit",editMode);
+  
+    setEditMode(true)
+    setShowModal(true);
+}
+
+
+  const handleTableChange = (
+    newPagination: TablePaginationConfig,
+    filters: Record<string, FilterValue | null>,
+    sorter: SorterResult<Product> | SorterResult<Product[]>
+  ) => {
+    dispatch(
+      fetchProducts({
+        pagination: newPagination,
+        sortField: sorter.field as string,
+        sortOrder: sorter.order?.substring(
+          0,
+          sorter.order?.length - 3
+        ) as string,
+        ...filters,
+      })
+    );
   };
 
   const columns: ColumnsType<Product> = [
@@ -54,39 +88,14 @@ const ProductTable: React.FC = () => {
     {
       title: "عملیات",
       key: "action",
-      render: () => (
-        <>
-          <a> ویرایش</a>
-
-          <a> حذف</a>
-        </>
+      render: (_,record) => (
+        <Space>
+          <Button type="primary" onClick={()=>handleEdit(record.id)}> ویرایش</Button>
+          <Button type="primary" danger> حذف</Button>         
+        </Space>
       ),
     },
   ];
-
-
-  useEffect(() => {
-    dispatch(fetchProducts(queryParams));
-    dispatch(fetchCategories());
-  }, []);
-
-  const handleTableChange = (
-    newPagination: TablePaginationConfig,
-    filters: Record<string, FilterValue | null>,
-    sorter: SorterResult<Product> | SorterResult<Product[]>
-  ) => {
-    dispatch(
-      fetchProducts({
-        pagination: newPagination,
-        sortField: sorter.field as string,
-        sortOrder: sorter.order?.substring(
-          0,
-          sorter.order?.length - 3
-        ) as string,
-        ...filters,
-      })
-    );
-  };
 
   return (
     <Table

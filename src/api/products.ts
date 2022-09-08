@@ -40,11 +40,20 @@ export const fetchAllCategoriesRequest = async () => {
 export const createProductRequest = async (newProduct:Product) => {
   try {
     const response = await axiosPrivate.post(PRODUCTS_URL, newProduct);
-    const countResponse = await axiosPrivate.put(`${PRODUCTS_COUNT_URL}`,{products:store.products.productsCount+1});
+    const {data} = await axiosPrivate.get<Product[]>(PRODUCTS_URL);
     return{
       product:response.data,
-      count :countResponse.data
+      count :data.length
     }
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const fetchSingleProduct = async (id:number) => {
+  try {
+    const response = await axiosPrivate.get<Product[]>(`${PRODUCTS_URL}/${id}`);
+    return response.data;
   } catch (error) {
     return Promise.reject(error);
   }
