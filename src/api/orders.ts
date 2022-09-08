@@ -6,9 +6,8 @@ import qs from "qs";
 
 import { GenerateParams } from "../utils";
 
+// fetch Paginated Data
 export const fetchPagedOrdersRequest = async (params: Params = {}) => {
-
-
   try {
     const response = await axiosPrivate.get(
       `${ORDERS_URL}?${qs.stringify(GenerateParams(params))}`

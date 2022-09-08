@@ -82,11 +82,13 @@ export type ProductManagementProps = {
   showModal: boolean
   setShowModal: Dispatch<SetStateAction<boolean>>
   setEditMode:Dispatch<SetStateAction<boolean>>
-  formFields:FormFileds
-  setFormFields:Dispatch<SetStateAction<FormFileds>>
+  formFields:FormFields
+  setFormFields:Dispatch<SetStateAction<FormFields>>
+  selectedProductID:number | null,
+  setSelectedProductID:Dispatch<SetStateAction<number| null>>
 };
 
-export type FormFileds = {
+export type FormFields = {
   modalTitle:string 
   Inputs :Product
 }
@@ -110,4 +112,10 @@ export type LoginState = {
 export type User = {
   username:string
   password:string
+}
+
+
+export type asyncThunkConfig = {
+  id:number;
+  editedProduct:Product
 }

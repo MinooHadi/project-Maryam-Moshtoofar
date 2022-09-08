@@ -8,7 +8,7 @@ let store:any
 export const injectStore = (_store:any) => {
   store = _store
 }
-
+// GET Paginated Data
 export const PagedProductsRequest = async (params: Params = {}) => {
   try {
 
@@ -26,7 +26,7 @@ export const PagedProductsRequest = async (params: Params = {}) => {
     return Promise.reject(error);
   }
 };
-
+// GET All Categories
 export const allCategoriesRequest = async () => {
   try {
     const response = await axiosPrivate.get<Category[]>(CATEGORIES_URL);
@@ -36,7 +36,7 @@ export const allCategoriesRequest = async () => {
   }
 };
 
-
+// CREATE
 export const createProductRequest = async (newProduct:Product) => {
   try {
     const response = await axiosPrivate.post(PRODUCTS_URL, newProduct);
@@ -49,10 +49,25 @@ export const createProductRequest = async (newProduct:Product) => {
     return Promise.reject(error);
   }
 };
-
+// GET single
 export const singleProductRequest = async (id:number) => {
   try {
     const response = await axiosPrivate.get<Product[]>(`${PRODUCTS_URL}/${id}`);
+    return response.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+// PUT Single Product
+export const updateProductRequest = async (id:number,editedProduct:Product) => {
+  console.log(editedProduct);
+  
+  try {
+    const response = await axiosPrivate.put(
+      `${PRODUCTS_URL}/${id}`,
+      editedProduct
+    );
     return response.data;
   } catch (error) {
     return Promise.reject(error);

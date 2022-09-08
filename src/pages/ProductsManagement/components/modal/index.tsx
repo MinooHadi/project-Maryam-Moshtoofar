@@ -10,7 +10,8 @@ const ProductModal: React.FC<ProductManagementProps> = ({
   showModal,
   setShowModal,
   formFields,
-  setFormFields
+  setFormFields,
+  selectedProductID
 }) => {
 
   useEffect(() => {
@@ -33,7 +34,9 @@ return (
       onCancel={handleCancel}
       footer={null}
     >
-      {editMode ? <EditProductForm></EditProductForm> : <AddProductForm modalOptions={formFields}/>}
+      {editMode ?
+       <EditProductForm selectedProductID={selectedProductID}></EditProductForm> 
+       :<AddProductForm modalOptions={formFields}/>}
       
       
     </Modal>

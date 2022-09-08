@@ -1,5 +1,5 @@
 import { Table, TablePaginationConfig ,Image, Button, Space} from "antd";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   useAppSelector,
   useAppDispatch,
@@ -16,7 +16,7 @@ import { BASE_URL } from "../../../../config/api";
 
 
 const ProductTable = (props:any) => {
-  const {editMode , setShowModal, setEditMode} = props
+  const {setSelectedProductID , setShowModal, setEditMode} = props
   const state = useAppSelector((state) => state.products);
   const {categories} = useAppSelector((state) => state.categories);
   const {queryParams} = useAppSelector((state) => state.products);
@@ -38,6 +38,7 @@ const ProductTable = (props:any) => {
     return cat?.name;
   };
 const handleEdit = (productID:number)=>{
+    setSelectedProductID(productID)
     dispatch(fetchSingleProduct(productID)).then(()=>setEditMode(true)).then(()=> setShowModal(true))
    
 }
@@ -62,6 +63,13 @@ const handleEdit = (productID:number)=>{
   };
 
   const columns: ColumnsType<Product> = [
+    {
+      title: 'ردیف',
+      dataIndex: 'id',
+      key: 'id',
+      width: '5%',
+      render:(__, _, index)=>(<>{index+1}</>)
+    },
     {
       title: "تصویر",
       dataIndex: "image",

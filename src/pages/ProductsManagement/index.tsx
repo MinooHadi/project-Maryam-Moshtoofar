@@ -13,6 +13,7 @@ const ProductsManagement: React.FC = () => {
     modalTitle:"اضافه کردن محصول" ,
     Inputs:EMPTY_INPUT
   })
+  const [selectedProductID , setSelectedProductID] = useState<null | number>(null)
 
   const props:ProductManagementProps = {
     showModal:showModal,
@@ -20,7 +21,9 @@ const ProductsManagement: React.FC = () => {
     editMode:editMode,
     setEditMode:setEditMode,
     formFields:formFields,
-    setFormFields:setFormFields
+    setFormFields:setFormFields,
+    selectedProductID:selectedProductID,
+    setSelectedProductID:setSelectedProductID
   }
   return (
     <>

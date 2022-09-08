@@ -9,7 +9,7 @@ import { UPLOAD_ROUTE } from '../../../../config/api';
 import { Product } from '../../../../types';
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from '../../../../redux/features/hooks';
-import { createProduct, fetchProducts } from '../../../../redux/features/admin/products/productsSlice';
+import { createProduct, fetchProducts, updateProduct } from '../../../../redux/features/admin/products/productsSlice';
 import type { UploadFile } from 'antd/es/upload/interface';
 import { GenerateImageURLs } from '../../../../utils';
 const { Option } = Select;
@@ -17,7 +17,7 @@ const { Option } = Select;
 
 const EditProductForm = (props: any) => {
   const product = useAppSelector((state)=> state.products.toBeEditedProduct)
-  const {modalOptions} = props
+  const {selectedProductID} = props
   const [form] = Form.useForm();
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [defaultFileList, setDefaultFileList] = useState<UploadFile[]>([]);
@@ -32,18 +32,9 @@ useEffect(() => {
     form.setFieldsValue(product);
   }, [product]);
 
-  useEffect(() => {
-    console.log(defaultFileList);
-    
-  
-
-  }, [defaultFileList])
-  
-
     const handleOnChange = (options:any) => {
         setDefaultFileList(options.fileList);
       };
-
       const handleUpload =async (options:any) => {
         const { onSuccess, onError, file, onProgress } = options;
         const fmData = new FormData();
@@ -59,6 +50,7 @@ useEffect(() => {
           }
         };
         fmData.append("image", file);
+
         try {
           const res = await axiosPrivate.post(
             UPLOAD_ROUTE,
@@ -84,13 +76,12 @@ useEffect(() => {
       };
 
       const onFinish = (values: any) => {
-        const newProduct:Product = {
+        const selectedProduct:Product = {
           ...values,
-          image:imgArray,
-          createdAt:new Date(),
+          image:[...imgArray],
           description:description
         }
-        dispatch(createProduct(newProduct)).then(()=>dispatch(fetchProducts())).then(()=>{
+        dispatch(updateProduct({id:selectedProductID,editedProduct:selectedProduct})).then(()=>dispatch(fetchProducts())).then(()=>{
           setImgArray([])
           setDefaultFileList([])
         }

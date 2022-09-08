@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { PagedProductsRequest,createProductRequest ,singleProductRequest } from "../../../../api/products";
-import { Product, ProductsState } from "../../../../types";
+import { PagedProductsRequest,createProductRequest ,singleProductRequest, updateProductRequest } from "../../../../api/products";
+import { asyncThunkConfig, Product, ProductsState } from "../../../../types";
 
 const initialState = {
   products: [],
@@ -32,6 +32,11 @@ export const fetchSingleProduct = createAsyncThunk(
   "products/fetchSingleProduct",
   (id:number) => singleProductRequest(id)
 );
+
+export const updateProduct = createAsyncThunk(
+  "products/updateProduct",
+  ({id, editedProduct} :asyncThunkConfig) => updateProductRequest(id , editedProduct)
+)
 
 export const productsSlice = createSlice({
   name: "products",
@@ -90,6 +95,16 @@ export const productsSlice = createSlice({
     });
     builder.addCase(fetchSingleProduct.rejected, (state, action) => {
       return { ...state, loading: false, error: String(action.payload) };
+    });
+     // update product
+     builder.addCase(updateProduct.pending, (state) => {
+      return { ...state, loading: true };
+    });
+    builder.addCase(updateProduct.fulfilled, (state, _) => {
+      return { ...state, loading: false };
+    });
+    builder.addCase(updateProduct.rejected, (state, action) => {
+      return { ...state , loading: false, error: String(action.payload) };
     });
   },
 });

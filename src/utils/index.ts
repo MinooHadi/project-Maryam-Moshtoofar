@@ -22,7 +22,7 @@ export const GenerateParams = (params: Params) => {
 
 export const GenerateImageURLs = (images:string[])=>images.map((image)=> {
   return {
-    uid: uuidv4(),
+    uid: image,
     name: image,
     url: `http://localhost:3002/files/${image}`
   }

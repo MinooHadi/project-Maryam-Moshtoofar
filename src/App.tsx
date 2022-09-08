@@ -1,8 +1,9 @@
 import "./App.css";
 import AppRoutes from "./routes";
 import { ConfigProvider } from "antd";
+import React from "react";
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <ConfigProvider direction="rtl">
       <AppRoutes />
