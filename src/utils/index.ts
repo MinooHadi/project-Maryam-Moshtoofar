@@ -1,5 +1,6 @@
 
 import { Params } from "../types";
+import { v4 as uuidv4 } from 'uuid';
 
 export const GenerateParams = (params: Params) => {
   let queryParams: any = {
@@ -17,3 +18,13 @@ export const GenerateParams = (params: Params) => {
 
   return queryParams;
 };
+
+
+export const GenerateImageURLs = (images:string[])=>images.map((image)=> {
+  return {
+    uid: uuidv4(),
+    name: image,
+    url: `http://localhost:3002/files/${image}`
+  }
+})
+ 

@@ -2,19 +2,21 @@ import { Modal} from "antd";
 import { useEffect } from "react";
 
 import { ProductManagementProps } from "../../../../types";
-import AddProductForm from "../addForm";
+import AddProductForm from "../forms/addProducts";
+import EditProductForm from "../forms/editProduct";
 
 const ProductModal: React.FC<ProductManagementProps> = ({
   editMode,
   showModal,
   setShowModal,
-  modalOptions,
-  setModalOptions
+  formFields,
+  setFormFields
 }) => {
 
   useEffect(() => {
     console.log("modal", editMode);
-    editMode? setModalOptions({modalTitle:"ویرایش محصول"}): setModalOptions({modalTitle:"اضافه کردن محصول"})
+    editMode? setFormFields({...formFields,modalTitle:"ویرایش محصول"})
+    : setFormFields({...formFields, modalTitle:"اضافه کردن محصول"})
   }, [editMode])
   
 
@@ -23,14 +25,17 @@ const ProductModal: React.FC<ProductManagementProps> = ({
     setShowModal(false);
   };
 
-  return (
+
+return (
     <Modal
-      title={modalOptions.modalTitle}
+      title={formFields.modalTitle}
       visible={showModal}
       onCancel={handleCancel}
       footer={null}
     >
-      <AddProductForm editMode={editMode}/>
+      {editMode ? <EditProductForm></EditProductForm> : <AddProductForm modalOptions={formFields}/>}
+      
+      
     </Modal>
   );
 };

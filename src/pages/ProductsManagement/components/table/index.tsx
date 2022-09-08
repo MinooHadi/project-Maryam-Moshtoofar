@@ -4,24 +4,23 @@ import {
   useAppSelector,
   useAppDispatch,
 } from "../../../../redux/features/hooks";
-import { fetchProducts } from "../../../../redux/features/products";
+import { fetchProducts, fetchSingleProduct } from "../../../../redux/features/admin/products/productsSlice";
 import {
   ColumnsType,
   FilterValue,
   SorterResult,
 } from "antd/lib/table/interface";
 import { Product } from "../../../../types";
-import { fetchCategories } from "../../../../redux/features/categories";
+import { fetchCategories } from "../../../../redux/features/admin/categories/categoriesSlice";
 import { BASE_URL } from "../../../../config/api";
-import { fetchSingleProduct } from "../../../../api/products";
 
 
 const ProductTable = (props:any) => {
   const {editMode , setShowModal, setEditMode} = props
   const state = useAppSelector((state) => state.products);
-  const categoriesState = useAppSelector((state) => state.categories);
-  const queryParams = useAppSelector((state) => state.products.queryParams);
-  const loading = useAppSelector((state) => state.products.loading);
+  const {categories} = useAppSelector((state) => state.categories);
+  const {queryParams} = useAppSelector((state) => state.products);
+  const {loading} = useAppSelector((state) => state.products);
   const dispatch = useAppDispatch();
   
   useEffect(() => {
@@ -33,16 +32,14 @@ const ProductTable = (props:any) => {
 
 
   const showCategory = (productCat: number) => {
-    const cat = categoriesState.categories.find(
+    const cat = categories.find(
       (category) => category.id === productCat
     );
     return cat?.name;
   };
 const handleEdit = (productID:number)=>{
-  console.log("edit",editMode);
-  
-    setEditMode(true)
-    setShowModal(true);
+    dispatch(fetchSingleProduct(productID)).then(()=>setEditMode(true)).then(()=> setShowModal(true))
+   
 }
 
 

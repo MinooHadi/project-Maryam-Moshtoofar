@@ -1,4 +1,4 @@
-import { Button, Form, Input, message, Progress, Row, Select, Upload } from 'antd';
+import { Button, Form, Input, message, Progress, Row, Select, Space, Upload } from 'antd';
 import { useState } from 'react';
 import { addProductRules } from './validation';
 import { UploadOutlined } from "@ant-design/icons";
@@ -8,12 +8,14 @@ import axiosPrivate from '../../../../api/http';
 import { UPLOAD_ROUTE } from '../../../../config/api';
 import { Product } from '../../../../types';
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { useAppDispatch } from '../../../../redux/features/hooks';
+import { useAppDispatch, useAppSelector } from '../../../../redux/features/hooks';
 import { createProduct, fetchProducts } from '../../../../redux/features/admin/products/productsSlice';
 const { Option } = Select;
 
 
 const AddProductForm = (props: any) => {
+  const {toBeEditedProduct} = useAppSelector((state)=> state.products)
+  const {modalOptions} = props
   const [form] = Form.useForm();
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [defaultFileList, setDefaultFileList] = useState([]);
@@ -132,16 +134,18 @@ const AddProductForm = (props: any) => {
         }}
       />
       </Form.Item>
-      <Form.Item>
-        <Button type="primary" htmlType="submit">
-          اضافه کردن محصول
-        </Button>
-      </Form.Item>
-      <Form.Item>
-      <Button htmlType="button">
-          ریست
-        </Button>
-      </Form.Item>
+      <Space>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            ذخیره محصول جدید  
+          </Button>
+        </Form.Item>
+        <Form.Item>
+        <Button htmlType="button">
+            ریست
+          </Button>
+        </Form.Item>
+      </Space>
     </Row>    
   </Form>
   )

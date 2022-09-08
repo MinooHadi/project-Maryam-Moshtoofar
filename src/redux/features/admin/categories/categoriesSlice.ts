@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchAllCategoriesRequest } from "../../../api/products";
-import { CategoriesState } from "../../../types";
+import {allCategoriesRequest } from "../../../../api/products";
+import { CategoriesState } from "../../../../types";
 
 const initialState = {
   categories: [],
@@ -10,7 +10,7 @@ const initialState = {
 
 export const fetchCategories = createAsyncThunk(
   "categories/fetchCategories",
-  fetchAllCategoriesRequest
+  allCategoriesRequest
 );
 
 export const categoriesSlice = createSlice({

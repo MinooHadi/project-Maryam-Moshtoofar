@@ -1,11 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { log } from "console";
-import { fetchPagedProductsRequest,createProductRequest } from "../../../../api/products";
+import { PagedProductsRequest,createProductRequest ,singleProductRequest } from "../../../../api/products";
 import { Product, ProductsState } from "../../../../types";
-import products from "../../products";
 
 const initialState = {
   products: [],
+  toBeEditedProduct:{},
   productsCount: 0,
   loading: false,
   error: "",
@@ -21,12 +20,17 @@ const initialState = {
 
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
-  fetchPagedProductsRequest
+  PagedProductsRequest
 );
 
 export const createProduct = createAsyncThunk(
   "products/createProduct",
   (newProduct:Product) => createProductRequest(newProduct)
+);
+
+export const fetchSingleProduct = createAsyncThunk(
+  "products/fetchSingleProduct",
+  (id:number) => singleProductRequest(id)
 );
 
 export const productsSlice = createSlice({
@@ -74,6 +78,17 @@ export const productsSlice = createSlice({
       return { ...state, loading: false , productsCount:count };
     });
     builder.addCase(createProduct.rejected, (state, action) => {
+      return { ...state, loading: false, error: String(action.payload) };
+    });
+
+    // read single product
+    builder.addCase(fetchSingleProduct.pending, (state) => {
+      return { ...state, loading: true};
+    });
+    builder.addCase(fetchSingleProduct.fulfilled, (state,action) => {
+      return { ...state, loading: false , toBeEditedProduct:action.payload };
+    });
+    builder.addCase(fetchSingleProduct.rejected, (state, action) => {
       return { ...state, loading: false, error: String(action.payload) };
     });
   },

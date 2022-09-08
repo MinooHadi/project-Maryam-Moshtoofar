@@ -9,7 +9,7 @@ export const injectStore = (_store:any) => {
   store = _store
 }
 
-export const fetchPagedProductsRequest = async (params: Params = {}) => {
+export const PagedProductsRequest = async (params: Params = {}) => {
   try {
 
     const response = await axiosPrivate.get<Product[]>(
@@ -27,7 +27,7 @@ export const fetchPagedProductsRequest = async (params: Params = {}) => {
   }
 };
 
-export const fetchAllCategoriesRequest = async () => {
+export const allCategoriesRequest = async () => {
   try {
     const response = await axiosPrivate.get<Category[]>(CATEGORIES_URL);
     return response.data;
@@ -50,7 +50,7 @@ export const createProductRequest = async (newProduct:Product) => {
   }
 };
 
-export const fetchSingleProduct = async (id:number) => {
+export const singleProductRequest = async (id:number) => {
   try {
     const response = await axiosPrivate.get<Product[]>(`${PRODUCTS_URL}/${id}`);
     return response.data;
