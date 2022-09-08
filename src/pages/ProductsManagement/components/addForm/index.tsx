@@ -1,27 +1,26 @@
 import { Button, Form, Input, message, Progress, Row, Select, Upload } from 'antd';
 import { useState } from 'react';
-import { addProductRules } from '../addModal/validation';
+import { addProductRules } from './validation';
 import { UploadOutlined } from "@ant-design/icons";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axiosPrivate from '../../../../api/http';
 import { UPLOAD_ROUTE } from '../../../../config/api';
 import { Product } from '../../../../types';
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { useAppDispatch } from '../../../../redux/features/hooks';
+import { createProduct, fetchProducts } from '../../../../redux/features/admin/products/productsSlice';
 const { Option } = Select;
+
 
 const AddProductForm:React.FC = () => {
   const [form] = Form.useForm();
+  const [confirmLoading, setConfirmLoading] = useState(false);
   const [defaultFileList, setDefaultFileList] = useState([]);
+  const [imgArray,setImgArray]=useState<string[]>([])
+  const [description,setDescription] = useState("")
   const [progress, setProgress] = useState(0);
-
-  const {
-    formState: { errors },
-    handleSubmit,
-  } = useForm<Product>();
-
-  
-  const onSubmit: SubmitHandler<Product> = (data) => console.log(data);
+  const dispatch = useAppDispatch();
 
     const handleOnChange = (options:any) => {
         setDefaultFileList(options.fileList);
@@ -49,7 +48,8 @@ const AddProductForm:React.FC = () => {
             config
           );
           onSuccess("Ok");
-          console.log("server res: ", res);
+          console.log("server res: ", res.data.filename);
+          setImgArray([...imgArray, res.data.filename]);
           message.success(`تصویر آپلود شد`)
         } catch (err) {
           message.error(`خطا`)
@@ -57,8 +57,30 @@ const AddProductForm:React.FC = () => {
         }
       };
 
+      const handleOk = () => {
+        message.loading('Action in progress..')
+        setConfirmLoading(true);
+        setTimeout(() => {
+          setConfirmLoading(false);
+        }, 2000);
+      };
+
+      const onFinish = (values: any) => {
+        const newProduct:Product = {
+          ...values,
+          image:imgArray,
+          createdAt:new Date(),
+          description:description
+        }
+        dispatch(createProduct(newProduct)).then(()=>dispatch(fetchProducts())).then(()=>{
+          setImgArray([])
+          setDefaultFileList([])
+        }
+        );
+      };
+
   return (
-    <Form form={form}>
+    <Form  form={form} onFinish={onFinish}>
     <Form.Item name="name" label="نام کالا" rules={addProductRules.productName}>
       <Input />
     </Form.Item>
@@ -67,21 +89,20 @@ const AddProductForm:React.FC = () => {
       label="دسته بندی"
       rules={addProductRules.category}
     >
-      <Select placeholder="انتخاب دسته بندی" allowClear>
-        <Option value="قهوه ترک">قهوه ترک</Option>
-        <Option value="قهوه دمی و اسپرسو">قهوه دمی و اسپرسو</Option>
-        <Option value="لوازم جانبی قهوه">لوازم جانبی قهوه</Option>
-        <Option value="قهوه فوری و شکلات">قهوه فوری و شکلات</Option>
+      <Select placeholder="انتخاب دسته بندی" allowClear >
+        <Option value={1}>قهوه ترک</Option>
+        <Option value={2}>قهوه دمی و اسپرسو</Option>
+        <Option value={3}>لوازم جانبی قهوه</Option>
+        <Option value={4}>قهوه فوری و شکلات</Option>
       </Select>
     </Form.Item>
-    <Form.Item label="انتخاب عکس ها  " rules={addProductRules.images}>
+    <Form.Item valuePropName="fileList" label="انتخاب عکس ها" rules={addProductRules.images}>
       <Upload
         accept="image/*"
         customRequest={handleUpload}
         onChange={handleOnChange}
         listType="picture"
         defaultFileList={defaultFileList}
-        className="image-upload-grid"
       >
        {defaultFileList.length >= 5 ? null : <Button>{<UploadOutlined />}آپلود</Button>}
       </Upload>
@@ -94,17 +115,32 @@ const AddProductForm:React.FC = () => {
       <Input />
     </Form.Item>
     <Row>
-      <Form.Item name="description" label="توضیحات" rules={addProductRules.description}>
+      <Form.Item
+       name="description"
+        label="توضیحات" 
+        valuePropName='data'
+        getValueFromEvent={(event, editor) => {
+        const data = editor.getData();
+        return data;
+        }}
+        rules={addProductRules.description}>             
       <CKEditor
+      value={description}
         editor={ClassicEditor}
-        onReady={(editor: any) => {
-        }}
         onChange={(event: any, editor: any) => {
-          const data = editor.getData();
+          setDescription(editor.getData()) 
         }}
-        onBlur={(event: any, editor: any) => {}}
-        onFocus={(event: any, editor: any) => {}}
       />
+      </Form.Item>
+      <Form.Item>
+        <Button type="primary" htmlType="submit">
+          اضافه کردن محصول
+        </Button>
+      </Form.Item>
+      <Form.Item>
+      <Button htmlType="button">
+          ریست
+        </Button>
       </Form.Item>
     </Row>    
   </Form>
@@ -112,3 +148,8 @@ const AddProductForm:React.FC = () => {
 }
 
 export default AddProductForm
+
+
+
+
+

@@ -12,13 +12,13 @@ export const addProductRules ={
         
     ],
     price: [
-        { required: true, message: "آپلود حداقل یک تصویر الزامی است" },
-        { pattern:new RegExp('^\d+$'), message: "قیمت میبایست فقط شامل اعداد باشد" }
+        { required: true, message: " قیمت الزامی است" },
+        { pattern:new RegExp('^[0-9]+$'), message: "قیمت میبایست فقط شامل اعداد باشد" }
         
     ],
     quantity: [
         { required: true, message: "موجودی محصول الزامی است" },
-        { pattern: new RegExp('^\d+$'), message: "موجودی میبایست فقط شامل اعداد باشد" }
+        { pattern: new RegExp('^[0-9]+$'), message: "موجودی میبایست فقط شامل اعداد باشد" }
         
     ],
     description: [

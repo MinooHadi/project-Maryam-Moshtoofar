@@ -6,9 +6,8 @@ import type { SorterResult } from "antd/es/table/interface";
 export type Product = {
   id: number;
   name: string;
-  category: number;
+  category:1 | 2 | 3 |4;
   image: string[];
-  thumbnail: string;
   price: number;
   quantity: number;
   createdAt: number;

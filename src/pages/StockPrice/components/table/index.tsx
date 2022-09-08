@@ -1,4 +1,4 @@
-import { Table, TablePaginationConfig } from "antd";
+import { Table, TablePaginationConfig , Image} from "antd";
 import convertToPersian from "num-to-persian";
 import { useEffect } from "react";
 import {
@@ -30,7 +30,7 @@ const ProductTable: React.FC = () => {
       dataIndex: "",
       key: "thumbnail",
       render: (_: string, record: Product) => (
-        <img src={`${BASE_URL}/files/${record.thumbnail}`} />
+        <Image width={200} src={`${BASE_URL}/files/${record.image[0]}`}/>
       ),
     },
     {

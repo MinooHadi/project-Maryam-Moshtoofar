@@ -1,4 +1,4 @@
-import { Table, TablePaginationConfig } from "antd";
+import { Table, TablePaginationConfig ,Image} from "antd";
 
 import { useEffect } from "react";
 import {
@@ -21,7 +21,8 @@ const ProductTable: React.FC = () => {
   const categoriesState = useAppSelector((state) => state.categories);
   const queryParams = useAppSelector((state) => state.products.queryParams);
   const loading = useAppSelector((state) => state.products.loading);
-
+  const dispatch = useAppDispatch();
+  
   const showCategory = (productCat: number) => {
     const cat = categoriesState.categories.find(
       (category) => category.id === productCat
@@ -33,11 +34,11 @@ const ProductTable: React.FC = () => {
     {
       title: "تصویر",
       dataIndex: "image",
-      key: "thumbnail",
+      key: "image",
       render: (_: string, record: Product) => (
-        <img src={`${BASE_URL}/files/${record.thumbnail}`} />
+        <Image width={200} src={`${BASE_URL}/files/${record.image[0]}`} />
       ),
-    },
+    }, 
     {
       title: "نام کالا",
       dataIndex: "name",
@@ -63,7 +64,6 @@ const ProductTable: React.FC = () => {
     },
   ];
 
-  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchProducts(queryParams));

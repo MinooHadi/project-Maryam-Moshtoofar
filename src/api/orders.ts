@@ -1,4 +1,4 @@
-import { COUNT_URL, ORDERS_URL } from "../config/api";
+import { ORDERS_COUNT_URL, ORDERS_URL } from "../config/api";
 import axiosPrivate from "./http";
 import { Order } from "../types";
 import { Params } from "../types";
@@ -13,7 +13,7 @@ export const fetchPagedOrdersRequest = async (params: Params = {}) => {
     const response = await axiosPrivate.get(
       `${ORDERS_URL}?${qs.stringify(GenerateParams(params))}`
     );
-    const countResponse = await axiosPrivate.get(COUNT_URL);
+    const countResponse = await axiosPrivate.get(ORDERS_COUNT_URL);
 
     return {
       orders: response.data,

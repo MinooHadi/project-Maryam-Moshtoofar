@@ -1,5 +1,5 @@
-import { Modal, message} from "antd";
-import { useState } from "react";
+import { Modal} from "antd";
+
 import { AdminHeaderProps, Product } from "../../../../types";
 import AddProductForm from "../addForm";
 
@@ -7,16 +7,6 @@ const AddProduct: React.FC<AdminHeaderProps> = ({
   showModal,
   setShowModal,
 }) => {
-  const [confirmLoading, setConfirmLoading] = useState(false);
-
-  const handleOk = () => {
-    message.loading('Action in progress..')
-    setConfirmLoading(true);
-    setTimeout(() => {
-      setShowModal(false);
-      setConfirmLoading(false);
-    }, 2000);
-  };
 
   const handleCancel = () => {
     setShowModal(false);
@@ -26,9 +16,8 @@ const AddProduct: React.FC<AdminHeaderProps> = ({
     <Modal
       title="افزودن کالا"
       visible={showModal}
-      onOk={handleOk}
-      confirmLoading={confirmLoading}
       onCancel={handleCancel}
+      footer={null}
     >
       <AddProductForm/>
     </Modal>
