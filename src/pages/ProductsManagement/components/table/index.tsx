@@ -13,11 +13,13 @@ import {
 import { Product } from "../../../../types";
 import { fetchCategories } from "../../../../redux/features/admin/categories/categoriesSlice";
 import { BASE_URL } from "../../../../config/api";
+import DeleteModal from "../deleteModal";
 
 
 const ProductTable = (props:any) => {
-  const {setSelectedProductID , setShowModal, setEditMode} = props
+  const {selectedProductID,setSelectedProductID , setShowModal, setEditMode} = props
   const state = useAppSelector((state) => state.products);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const {categories} = useAppSelector((state) => state.categories);
   const {queryParams} = useAppSelector((state) => state.products);
   const {loading} = useAppSelector((state) => state.products);
@@ -41,6 +43,11 @@ const handleEdit = (productID:number)=>{
     setSelectedProductID(productID)
     dispatch(fetchSingleProduct(productID)).then(()=>setEditMode(true)).then(()=> setShowModal(true))
    
+}
+
+const handleDelete = (productID:number)=> {
+  setSelectedProductID(productID)
+  setIsModalOpen(true)
 }
 
 
@@ -96,13 +103,14 @@ const handleEdit = (productID:number)=>{
       render: (_,record) => (
         <Space>
           <Button type="primary" onClick={()=>handleEdit(record.id)}> ویرایش</Button>
-          <Button type="primary" danger> حذف</Button>         
+          <Button type="primary" danger onClick={()=>handleDelete(record.id)}> حذف</Button>         
         </Space>
       ),
     },
   ];
 
   return (
+    <>
     <Table
       columns={columns}
       dataSource={[...state.products]}
@@ -111,6 +119,8 @@ const handleEdit = (productID:number)=>{
       loading={loading}
       onChange={handleTableChange}
     />
+    <DeleteModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} selectedProduct={selectedProductID}/>
+    </>
   );
 };
 

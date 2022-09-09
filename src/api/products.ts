@@ -61,13 +61,23 @@ export const singleProductRequest = async (id:number) => {
 
 // PUT Single Product
 export const updateProductRequest = async (id:number,editedProduct:Product) => {
-  console.log(editedProduct);
   
   try {
     const response = await axiosPrivate.put(
       `${PRODUCTS_URL}/${id}`,
       editedProduct
     );
+    return response.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+// DELETE Product
+
+export const deleteProductRequest = async (id:number) => {
+  try {
+    const response = await axiosPrivate.delete(`${PRODUCTS_URL}/${id}`);
     return response.data;
   } catch (error) {
     return Promise.reject(error);

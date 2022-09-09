@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { PagedProductsRequest,createProductRequest ,singleProductRequest, updateProductRequest } from "../../../../api/products";
+import { PagedProductsRequest,createProductRequest ,singleProductRequest, updateProductRequest, deleteProductRequest } from "../../../../api/products";
 import { asyncThunkConfig, Product, ProductsState } from "../../../../types";
 
 const initialState = {
@@ -38,6 +38,10 @@ export const updateProduct = createAsyncThunk(
   ({id, editedProduct} :asyncThunkConfig) => updateProductRequest(id , editedProduct)
 )
 
+export const deleteProduct = createAsyncThunk("products/deleteProduct", (id:number) =>
+  deleteProductRequest(id)
+);
+
 export const productsSlice = createSlice({
   name: "products",
   initialState,
@@ -74,7 +78,6 @@ export const productsSlice = createSlice({
     });
     // create
      builder.addCase(createProduct.pending, (state) => {
-
       return { ...state, loading: true};
     });
     builder.addCase(createProduct.fulfilled, (state,action) => {
@@ -96,6 +99,7 @@ export const productsSlice = createSlice({
     builder.addCase(fetchSingleProduct.rejected, (state, action) => {
       return { ...state, loading: false, error: String(action.payload) };
     });
+
      // update product
      builder.addCase(updateProduct.pending, (state) => {
       return { ...state, loading: true };
@@ -105,6 +109,17 @@ export const productsSlice = createSlice({
     });
     builder.addCase(updateProduct.rejected, (state, action) => {
       return { ...state , loading: false, error: String(action.payload) };
+    });
+
+    // delete product
+    builder.addCase(deleteProduct.pending, (state) => {
+      return { ...state, loading: true };
+    });
+    builder.addCase(deleteProduct.fulfilled, (state, action) => {
+      return { ...state, loading: false };
+    });
+    builder.addCase(deleteProduct.rejected, (state, action) => {
+      return { ...state, loading: false, error: String(action.payload) };
     });
   },
 });

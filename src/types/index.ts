@@ -88,6 +88,12 @@ export type ProductManagementProps = {
   setSelectedProductID:Dispatch<SetStateAction<number| null>>
 };
 
+export type DeleteModalProps = {
+  selectedProduct:number
+  isModalOpen:boolean;
+  setIsModalOpen:Dispatch<SetStateAction<boolean>>
+}
+
 export type FormFields = {
   modalTitle:string 
   Inputs :Product
