@@ -7,7 +7,7 @@ const ProductHeader = (props: any) => {
 const { editMode,setShowModal , setEditMode} = props
 
   const handleClick = () => {
-    console.log("add",editMode);
+
     setEditMode(false)
     setShowModal(true);
   };

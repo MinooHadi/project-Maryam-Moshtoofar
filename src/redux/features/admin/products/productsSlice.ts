@@ -4,7 +4,7 @@ import { asyncThunkConfig, Product, ProductsState } from "../../../../types";
 
 const initialState = {
   products: [],
-  toBeEditedProduct:{},
+  product:{},
   productsCount: 0,
   loading: false,
   error: "",
@@ -82,7 +82,6 @@ export const productsSlice = createSlice({
     });
     builder.addCase(createProduct.fulfilled, (state,action) => {
       const {count} = action.payload
-      console.log(count);
       return { ...state, loading: false , productsCount:count };
     });
     builder.addCase(createProduct.rejected, (state, action) => {
@@ -94,7 +93,7 @@ export const productsSlice = createSlice({
       return { ...state, loading: true};
     });
     builder.addCase(fetchSingleProduct.fulfilled, (state,action) => {
-      return { ...state, loading: false , toBeEditedProduct:action.payload };
+      return { ...state, loading: false , product:action.payload };
     });
     builder.addCase(fetchSingleProduct.rejected, (state, action) => {
       return { ...state, loading: false, error: String(action.payload) };

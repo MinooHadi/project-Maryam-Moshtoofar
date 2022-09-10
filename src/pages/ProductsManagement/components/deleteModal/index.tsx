@@ -7,7 +7,6 @@ const dispatch = useAppDispatch()
   const handleOk = () => {
 
     setIsModalOpen(false);
-    console.log(selectedProduct);
     dispatch(deleteProduct(selectedProduct))
     .then(()=>setIsModalOpen(false))
     .then(()=>{

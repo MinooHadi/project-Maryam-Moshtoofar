@@ -57,7 +57,7 @@ export type OrdersState = {
 
 export type ProductsState = {
   products: Product[]
-  toBeEditedProduct:any
+  product:any
   productsCount: number
   loading: boolean
   error: string
@@ -107,6 +107,7 @@ export interface Params {
   sortField?: string
   sortOrder?: string
   delivered?: string[]
+  category?:string
 }
 
 
@@ -124,4 +125,9 @@ export type User = {
 export type asyncThunkConfig = {
   id:number;
   editedProduct:Product
+}
+
+
+export type ProductCardProps = {
+product:Product
 }

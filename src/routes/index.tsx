@@ -13,7 +13,7 @@ import {
 } from "../config/routes";
 import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/Home";
-import Product from "../pages/Product";
+import Product from "../pages/product";
 import Category from "../pages/Category";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";

@@ -23,20 +23,20 @@ export const items = [
     key: "cat",
     children: [
       {
-        label: <NavLink to="/category-ground-beans">پودر و دانه قهوه</NavLink>,
+        label: <NavLink to="/category1">قهوه ترک</NavLink>,
         key: "cat:1",
       },
       {
-        label: <NavLink to="/category-instant">قهوه فوری</NavLink>,
+        label: <NavLink to="/category2">قهوه دمی و اسپرسو</NavLink>,
         key: "cat:2",
       },
       {
-        label: <NavLink to="/category-packages">پکیج های قهوه</NavLink>,
+        label: <NavLink to="/category3">لوازم جانبی قهوه</NavLink>,
         key: "cat:3",
       },
       {
         label: (
-          <NavLink to="/category-accessories">قهوه ساز و لوازم جانبی</NavLink>
+          <NavLink to="/category4">قهوه فوری و شکلات</NavLink>
         ),
         key: "cat:4",
       },

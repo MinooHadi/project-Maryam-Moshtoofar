@@ -14,7 +14,7 @@ const { Option } = Select;
 
 
 const AddProductForm = (props: any) => {
-  const {toBeEditedProduct} = useAppSelector((state)=> state.products)
+  const {product} = useAppSelector((state)=> state.products)
   const {modalOptions} = props
   const [form] = Form.useForm();
   const [confirmLoading, setConfirmLoading] = useState(false);
@@ -50,7 +50,6 @@ const AddProductForm = (props: any) => {
             config
           );
           onSuccess("Ok");
-          console.log("server res: ", res.data.filename);
           setImgArray([...imgArray, res.data.filename]);
           message.success(`تصویر آپلود شد`)
         } catch (err) {

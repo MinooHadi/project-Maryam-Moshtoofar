@@ -16,7 +16,7 @@ const { Option } = Select;
 
 
 const EditProductForm = (props: any) => {
-  const product = useAppSelector((state)=> state.products.toBeEditedProduct)
+  const {product} = useAppSelector((state)=> state.products)
   const {selectedProductID} = props
   const [form] = Form.useForm();
   const [confirmLoading, setConfirmLoading] = useState(false);
@@ -58,7 +58,6 @@ useEffect(() => {
             config
           );
           onSuccess("Ok");
-          console.log("server res: ", res.data.filename);
           setImgArray([...imgArray, res.data.filename]);
           message.success(`تصویر آپلود شد`)
         } catch (err) {

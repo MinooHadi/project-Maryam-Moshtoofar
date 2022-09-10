@@ -15,6 +15,12 @@ export const GenerateParams = (params: Params) => {
       delivered: params.delivered[0],
     };
   }
+  if (params.category?.length === 1) {
+    queryParams = {
+      ...queryParams,
+      category: params.category[0],
+    };
+  }
 
   return queryParams;
 };

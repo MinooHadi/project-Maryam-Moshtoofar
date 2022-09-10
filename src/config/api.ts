@@ -8,3 +8,4 @@ export const ORDERS_COUNT_URL = "/orders-count";
 export const LOGIN_URL = "/auth/login";
 export const REFRESH_TOKEN_URL = "/auth/refresh-token";
 export const UPLOAD_ROUTE = "http://localhost:3002/upload"
+export const FILES_ROUTE ="http://localhost:3002/files"
