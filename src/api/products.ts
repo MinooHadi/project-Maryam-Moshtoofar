@@ -1,56 +1,60 @@
-import { PRODUCTS_URL, CATEGORIES_URL, PRODUCTS_COUNT_URL } from "../config/api";
+import {
+  PRODUCTS_URL,
+  CATEGORIES_URL,
+  PRODUCTS_COUNT_URL,
+} from "../config/api";
 import axiosPrivate from "./http";
 import { Product, Category, Params } from "../types";
 import { GenerateParams } from "../utils";
 import qs from "qs";
-let store:any
+let store: any;
 
-export const injectStore = (_store:any) => {
-  store = _store
-}
+export const injectStore = (_store: any) => {
+  store = _store;
+};
 // GET Paginated Data
 export const PagedProductsRequest = async (params: Params = {}) => {
+  console.log(params);
+  let count: number;
   try {
-
     const response = await axiosPrivate.get<Product[]>(
       `${PRODUCTS_URL}?${qs.stringify(GenerateParams(params))}`
     );
-    const {data} = await axiosPrivate.get<Product[]>(PRODUCTS_URL);
 
+    count = await (await (axiosPrivate.get<Product[]>(PRODUCTS_URL))).data.length;
+    if (params.category) {
+      count = await (
+        await axiosPrivate.get<Product[]>(
+          `${PRODUCTS_URL}?category=${params.category}`
+        )
+      ).data.length;
+    }
     return {
       products: response.data,
-      count: data.length,
+      count: count,
       queryParams: params,
     };
   } catch (error) {
     return Promise.reject(error);
   }
 };
-// GET All Categories
-export const allCategoriesRequest = async () => {
+
+// CREATE
+export const createProductRequest = async (newProduct: Product) => {
   try {
-    const response = await axiosPrivate.get<Category[]>(CATEGORIES_URL);
-    return response.data;
+    const response = await axiosPrivate.post(PRODUCTS_URL, newProduct);
+    const { data } = await axiosPrivate.get<Product[]>(PRODUCTS_URL);
+    return {
+      product: response.data,
+      count: data.length,
+    };
   } catch (error) {
     return Promise.reject(error);
   }
 };
 
-// CREATE
-export const createProductRequest = async (newProduct:Product) => {
-  try {
-    const response = await axiosPrivate.post(PRODUCTS_URL, newProduct);
-    const {data} = await axiosPrivate.get<Product[]>(PRODUCTS_URL);
-    return{
-      product:response.data,
-      count :data.length
-    }
-  } catch (error) {
-    return Promise.reject(error);
-  }
-};
-// GET single
-export const singleProductRequest = async (id:number) => {
+// GET single data
+export const singleProductRequest = async (id: string) => {
   try {
     const response = await axiosPrivate.get<Product[]>(`${PRODUCTS_URL}/${id}`);
     return response.data;
@@ -59,9 +63,11 @@ export const singleProductRequest = async (id:number) => {
   }
 };
 
-// PUT Single Product
-export const updateProductRequest = async (id:number,editedProduct:Product) => {
-  
+// PUT
+export const updateProductRequest = async (
+  id: number,
+  editedProduct: Product
+) => {
   try {
     const response = await axiosPrivate.put(
       `${PRODUCTS_URL}/${id}`,
@@ -75,7 +81,7 @@ export const updateProductRequest = async (id:number,editedProduct:Product) => {
 
 // DELETE Product
 
-export const deleteProductRequest = async (id:number) => {
+export const deleteProductRequest = async (id: number) => {
   try {
     const response = await axiosPrivate.delete(`${PRODUCTS_URL}/${id}`);
     return response.data;

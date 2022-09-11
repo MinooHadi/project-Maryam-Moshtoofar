@@ -1,17 +1,23 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { PagedProductsRequest,createProductRequest ,singleProductRequest, updateProductRequest, deleteProductRequest } from "../../../../api/products";
+import {
+  PagedProductsRequest,
+  createProductRequest,
+  singleProductRequest,
+  updateProductRequest,
+  deleteProductRequest,
+} from "../../../../api/products";
 import { asyncThunkConfig, Product, ProductsState } from "../../../../types";
 
 const initialState = {
   products: [],
-  product:{},
+  product: {},
   productsCount: 0,
   loading: false,
   error: "",
   queryParams: {
     pagination: {
       current: 1,
-      pageSize: 5,
+      pageSize: 2,
     },
     sortField: undefined,
     sortOrder: undefined,
@@ -25,21 +31,23 @@ export const fetchProducts = createAsyncThunk(
 
 export const createProduct = createAsyncThunk(
   "products/createProduct",
-  (newProduct:Product) => createProductRequest(newProduct)
+  (newProduct: Product) => createProductRequest(newProduct)
 );
 
 export const fetchSingleProduct = createAsyncThunk(
   "products/fetchSingleProduct",
-  (id:number) => singleProductRequest(id)
+  (id: string) => singleProductRequest(id)
 );
 
 export const updateProduct = createAsyncThunk(
   "products/updateProduct",
-  ({id, editedProduct} :asyncThunkConfig) => updateProductRequest(id , editedProduct)
-)
+  ({ id, editedProduct }: asyncThunkConfig) =>
+    updateProductRequest(id, editedProduct)
+);
 
-export const deleteProduct = createAsyncThunk("products/deleteProduct", (id:number) =>
-  deleteProductRequest(id)
+export const deleteProduct = createAsyncThunk(
+  "products/deleteProduct",
+  (id: number) => deleteProductRequest(id)
 );
 
 export const productsSlice = createSlice({
@@ -77,12 +85,12 @@ export const productsSlice = createSlice({
       };
     });
     // create
-     builder.addCase(createProduct.pending, (state) => {
-      return { ...state, loading: true};
+    builder.addCase(createProduct.pending, (state) => {
+      return { ...state, loading: true };
     });
-    builder.addCase(createProduct.fulfilled, (state,action) => {
-      const {count} = action.payload
-      return { ...state, loading: false , productsCount:count };
+    builder.addCase(createProduct.fulfilled, (state, action) => {
+      const { count } = action.payload;
+      return { ...state, loading: false, productsCount: count };
     });
     builder.addCase(createProduct.rejected, (state, action) => {
       return { ...state, loading: false, error: String(action.payload) };
@@ -90,24 +98,24 @@ export const productsSlice = createSlice({
 
     // read single product
     builder.addCase(fetchSingleProduct.pending, (state) => {
-      return { ...state, loading: true};
+      return { ...state, loading: true };
     });
-    builder.addCase(fetchSingleProduct.fulfilled, (state,action) => {
-      return { ...state, loading: false , product:action.payload };
+    builder.addCase(fetchSingleProduct.fulfilled, (state, action) => {
+      return { ...state, loading: false, product: action.payload };
     });
     builder.addCase(fetchSingleProduct.rejected, (state, action) => {
       return { ...state, loading: false, error: String(action.payload) };
     });
 
-     // update product
-     builder.addCase(updateProduct.pending, (state) => {
+    // update product
+    builder.addCase(updateProduct.pending, (state) => {
       return { ...state, loading: true };
     });
     builder.addCase(updateProduct.fulfilled, (state, _) => {
       return { ...state, loading: false };
     });
     builder.addCase(updateProduct.rejected, (state, action) => {
-      return { ...state , loading: false, error: String(action.payload) };
+      return { ...state, loading: false, error: String(action.payload) };
     });
 
     // delete product

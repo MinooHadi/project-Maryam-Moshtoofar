@@ -17,7 +17,7 @@ const ProductTable: React.FC = () => {
   const queryParams = useAppSelector((state) => state.products.queryParams);
   const loading = useAppSelector((state) => state.products.loading);
 
-  const showCategory = (productCat: number) => {
+  const showCategory = (productCat: string) => {
     const cat = categoriesState.categories.find(
       (category) => category.id === productCat
     );

@@ -33,19 +33,19 @@ const ProductTable = (props:any) => {
 
 
 
-  const showCategory = (productCat: number) => {
+  const showCategory = (productCat: string) => {
     const cat = categories.find(
       (category) => category.id === productCat
     );
     return cat?.name;
   };
-const handleEdit = (productID:number)=>{
+const handleEdit = (productID:string)=>{
     setSelectedProductID(productID)
     dispatch(fetchSingleProduct(productID)).then(()=>setEditMode(true)).then(()=> setShowModal(true))
    
 }
 
-const handleDelete = (productID:number)=> {
+const handleDelete = (productID:string)=> {
   setSelectedProductID(productID)
   setIsModalOpen(true)
 }
