@@ -13,6 +13,7 @@ const Product: React.FC = () => {
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(fetchSingleProduct(Number(id)))
+console.log(id);
 
   }, [])
   const onChange = (value: number) => {

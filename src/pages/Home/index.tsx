@@ -1,11 +1,11 @@
 
-import CategoryPage from "../Category";
+import CategoryPage from "../category";
 
 
 
 const Home: React.FC = () => {
 
-  return <CategoryPage />
+  return <>Home</>
 };
 
 export default Home;

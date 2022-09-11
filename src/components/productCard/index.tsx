@@ -1,4 +1,4 @@
-import { Card } from 'antd';
+import { Button, Card } from 'antd';
 import React from 'react';
 import { ProductCardProps } from '../../types';
 
@@ -15,6 +15,7 @@ return(
     cover={<img alt="example" src={`http://localhost:3002/files/${image[0]}`}/>}
   >
     <Meta title={name} description={`${price} تومان`} />
+    <Button>افزودن به سبد</Button>
     <Meta/>
   </Card>
 )}

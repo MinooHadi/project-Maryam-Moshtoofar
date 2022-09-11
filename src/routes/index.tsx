@@ -12,12 +12,12 @@ import {
   ORDERS_ROUTE,
 } from "../config/routes";
 import MainLayout from "../layouts/MainLayout";
-import Home from "../pages/Home";
+import Home from "../pages/home";
 import Product from "../pages/product";
-import Category from "../pages/Category";
-import Cart from "../pages/Cart";
-import Checkout from "../pages/Checkout";
-import Redirect from "../pages/Redirect";
+import Category from "../pages/category";
+import Cart from "../pages/cart";
+import Checkout from "../pages/checkout";
+import Redirect from "../pages/redirect";
 import Login from "../pages/login";
 import AdminLayout from "../layouts/AdminLayout";
 import ProductsManagement from "../pages/ProductsManagement";

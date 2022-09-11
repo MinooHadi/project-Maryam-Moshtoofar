@@ -17,6 +17,7 @@ const CategoryPage: React.FC = () => {
       dispatch(fetchProducts({category:id}))
       dispatch((fetchCategories())).then((res)=>{
         const categories:any = res.payload
+        console.log(categories);
         const selectedCategory = categories.find((category:Category)=> category.id === Number(id) ) 
         setCategory(selectedCategory.name)
       })     
@@ -24,7 +25,7 @@ const CategoryPage: React.FC = () => {
   
   return <>
   <Typography.Title>{category}</Typography.Title>
-  {products.map((product)=> <Link to={`product${product.id}`}><ProductCard product={product} key={product.id}  /></Link>)}
+  {products.map((product)=> <Link key={product.id} to={`/product${product.id}`}><ProductCard product={product} key={product.id}  /></Link>)}
   </>;
 };
 

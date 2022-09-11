@@ -1,6 +1,6 @@
 export const HOME_ROUTE = "/";
 export const CATEGORY_ROUTE = "category:id";
-export const PRODUCT_ROUTE = "category:id/product:id";
+export const PRODUCT_ROUTE = "product:id";
 export const CART_ROUTE = "cart";
 export const CHECKOUT_ROUTE = "checkout";
 export const REDIRECT_ROUTE = "redirect";
