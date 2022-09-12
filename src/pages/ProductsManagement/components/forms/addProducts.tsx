@@ -73,11 +73,11 @@ const AddProductForm = (props: any) => {
           createdAt:new Date(),
           description:description
         }
-        dispatch(createProduct(newProduct)).then(()=>dispatch(fetchProducts())).then(()=>{
-          setImgArray([])
-          setDefaultFileList([])
-        }
-        );
+        // dispatch(createProduct(newProduct)).then(()=>dispatch(fetchProducts())).then(()=>{
+        //   setImgArray([])
+        //   setDefaultFileList([])
+        // }
+        // );
       };
 
   return (

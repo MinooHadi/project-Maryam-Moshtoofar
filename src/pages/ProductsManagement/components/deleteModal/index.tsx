@@ -11,7 +11,7 @@ const dispatch = useAppDispatch()
     .then(()=>setIsModalOpen(false))
     .then(()=>{
         message.success('کالا حذف شد')
-       dispatch(fetchProducts())
+      //  dispatch(fetchProducts())
     } )
   };
 

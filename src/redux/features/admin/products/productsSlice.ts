@@ -18,9 +18,10 @@ const initialState = {
     pagination: {
       current: 1,
       pageSize: 2,
+      total: 0,
     },
-    sortField: undefined,
-    sortOrder: undefined,
+    sortField: null,
+    sortOrder: null,
   },
 } as ProductsState;
 
@@ -60,20 +61,14 @@ export const productsSlice = createSlice({
       return { ...state, loading: true };
     });
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
-      const { products, count, queryParams } = action.payload;
+      const { products, queryParams } = action.payload;
+      console.log(queryParams);
+
       return {
         ...state,
         loading: false,
         products: products,
-        queryParams: {
-          pagination: {
-            current: queryParams.pagination?.current,
-            pageSize: queryParams.pagination?.pageSize,
-            total: count,
-          },
-          sortField: queryParams.sortField,
-          sortOrder: queryParams.sortOrder,
-        },
+        queryParams:queryParams
       };
     });
     builder.addCase(fetchProducts.rejected, (state, action) => {

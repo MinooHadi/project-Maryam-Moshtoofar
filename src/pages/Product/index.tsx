@@ -11,7 +11,6 @@ const Product: React.FC = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(fetchSingleProduct(id!));
-    console.log(id);
   }, []);
   const onChange = (value: number) => {
     console.log("changed", value);

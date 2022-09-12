@@ -1,38 +1,35 @@
-import {
-  PRODUCTS_URL,
-  CATEGORIES_URL,
-  PRODUCTS_COUNT_URL,
-} from "../config/api";
+import { PRODUCTS_URL } from "../config/api";
 import axiosPrivate from "./http";
-import { Product, Category, Params } from "../types";
-import { GenerateParams } from "../utils";
-import qs from "qs";
+import { Product } from "../types";
+import { URLSearchParams } from "url";
+import { generateTableConfig } from "../utils";
 let store: any;
 
 export const injectStore = (_store: any) => {
   store = _store;
 };
 // GET Paginated Data
-export const PagedProductsRequest = async (params: Params = {}) => {
-  console.log(params);
+export const PagedProductsRequest = async (params: URLSearchParams) => {
+  console.log(params.toString());
+
   let count: number;
   try {
     const response = await axiosPrivate.get<Product[]>(
-      `${PRODUCTS_URL}?${qs.stringify(GenerateParams(params))}`
+      `${PRODUCTS_URL}?${params.toString()}`
     );
 
-    count = await (await (axiosPrivate.get<Product[]>(PRODUCTS_URL))).data.length;
-    if (params.category) {
+    count = await (await axiosPrivate.get<Product[]>(PRODUCTS_URL)).data.length;
+    if (params.get("category")) {
       count = await (
         await axiosPrivate.get<Product[]>(
-          `${PRODUCTS_URL}?category=${params.category}`
+          `${PRODUCTS_URL}?category=${params.get("category")}`
         )
       ).data.length;
     }
+
     return {
       products: response.data,
-      count: count,
-      queryParams: params,
+      queryParams: generateTableConfig(params, count),
     };
   } catch (error) {
     return Promise.reject(error);

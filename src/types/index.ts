@@ -63,8 +63,8 @@ export type ProductsState = {
   error: string;
   queryParams: {
     pagination: TablePaginationConfig;
-    sortField: string | undefined;
-    sortOrder: string | undefined;
+    sortField: string | null;
+    sortOrder: string | null;
   };
 };
 

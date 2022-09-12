@@ -80,11 +80,11 @@ useEffect(() => {
           image:[...imgArray],
           description:description
         }
-        dispatch(updateProduct({id:selectedProductID,editedProduct:selectedProduct})).then(()=>dispatch(fetchProducts())).then(()=>{
-          setImgArray([])
-          setDefaultFileList([])
-        }
-        );
+        // dispatch(updateProduct({id:selectedProductID,editedProduct:selectedProduct})).then(()=>dispatch(fetchProducts())).then(()=>{
+        //   setImgArray([])
+        //   setDefaultFileList([])
+        // }
+        // );
       };
 
   return (

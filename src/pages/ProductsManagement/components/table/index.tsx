@@ -26,7 +26,7 @@ const ProductTable = (props:any) => {
   const dispatch = useAppDispatch();
   
   useEffect(() => {
-    dispatch(fetchProducts(queryParams));
+    // dispatch(fetchProducts(queryParams));
     dispatch(fetchCategories());
   }, []);
 
@@ -56,17 +56,17 @@ const handleDelete = (productID:string)=> {
     filters: Record<string, FilterValue | null>,
     sorter: SorterResult<Product> | SorterResult<Product[]>
   ) => {
-    dispatch(
-      fetchProducts({
-        pagination: newPagination,
-        sortField: sorter.field as string,
-        sortOrder: sorter.order?.substring(
-          0,
-          sorter.order?.length - 3
-        ) as string,
-        ...filters,
-      })
-    );
+    // dispatch(
+    //   fetchProducts({
+    //     pagination: newPagination,
+    //     sortField: sorter.field as string,
+    //     sortOrder: sorter.order?.substring(
+    //       0,
+    //       sorter.order?.length - 3
+    //     ) as string,
+    //     ...filters,
+    //   })
+    // );
   };
 
   const columns: ColumnsType<Product> = [
