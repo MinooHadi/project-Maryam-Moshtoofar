@@ -56,14 +56,12 @@ const ProductTable = (props: any) => {
 
   const handleTableChange = (
     newPagination: TablePaginationConfig,
-    filters: Record<string, FilterValue | null>,
     sorter: SorterResult<Product> | SorterResult<Product[]>
   ) => {
     if (sorter.order) {
       const order = sorter.order?.substring(0, sorter.order?.length - 3);
       searchParams.set("_order", order);
     } else searchParams.delete("_order");
-
     searchParams.set("_page", String(newPagination.current));
     setSearchParams(searchParams);
     dispatch(fetchProducts(searchParams));

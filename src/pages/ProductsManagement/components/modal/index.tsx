@@ -15,7 +15,6 @@ const ProductModal: React.FC<ProductManagementProps> = ({
 }) => {
 
   useEffect(() => {
-
     editMode? setFormFields({...formFields,modalTitle:"ویرایش محصول"})
     : setFormFields({...formFields, modalTitle:"اضافه کردن محصول"})
   }, [editMode])

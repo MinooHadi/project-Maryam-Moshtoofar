@@ -1,4 +1,4 @@
-import { Table, TablePaginationConfig , Image} from "antd";
+import { Table, TablePaginationConfig, Image } from "antd";
 import convertToPersian from "num-to-persian";
 import { useEffect } from "react";
 import {
@@ -6,19 +6,30 @@ import {
   useAppDispatch,
 } from "../../../../redux/features/hooks";
 import { fetchProducts } from "../../../../redux/features/admin/products/productsSlice";
-import { FilterValue, SorterResult } from "antd/lib/table/interface";
+import { fetchCategories } from "../../../../redux/features/admin/categories/categoriesSlice";
+import { SorterResult } from "antd/lib/table/interface";
 import { Product } from "../../../../types";
 import { BASE_URL } from "../../../../config/api";
 import React from "react";
+import { useSearchParams } from "react-router-dom";
 
 const ProductTable: React.FC = () => {
+  const [searchParams, setSearchParams] = useSearchParams({
+    _page: "1",
+    _limit: "5",
+  });
   const state = useAppSelector((state) => state.products);
-  const categoriesState = useAppSelector((state) => state.categories);
+  const { categories } = useAppSelector((state) => state.categories);
   const queryParams = useAppSelector((state) => state.products.queryParams);
   const loading = useAppSelector((state) => state.products.loading);
 
+  useEffect(() => {
+    dispatch(fetchProducts(searchParams));
+    dispatch(fetchCategories());
+  }, [searchParams]);
+
   const showCategory = (productCat: string) => {
-    const cat = categoriesState.categories.find(
+    const cat = categories.find(
       (category) => category.id === productCat
     );
     return cat?.name;
@@ -30,7 +41,7 @@ const ProductTable: React.FC = () => {
       dataIndex: "",
       key: "thumbnail",
       render: (_: string, record: Product) => (
-        <Image width={200} src={`${BASE_URL}/files/${record.image[0]}`}/>
+        <Image width={200} src={`${BASE_URL}/files/${record.image[0]}`} />
       ),
     },
     {
@@ -48,13 +59,6 @@ const ProductTable: React.FC = () => {
         ),
     },
     {
-      title: "دسته بندی",
-      dataIndex: "category",
-      key: "category",
-      sorter: (a: any, b: any) => b.category - a.category,
-      render: (_: any, record: Product) => showCategory(record.category),
-    },
-    {
       title: "موجودی",
       dataIndex: "quantity",
       key: "quantity",
@@ -65,24 +69,11 @@ const ProductTable: React.FC = () => {
 
   const handleTableChange = (
     newPagination: TablePaginationConfig,
-    filters: Record<string, FilterValue | null>,
-    sorter: SorterResult<Product> | SorterResult<Product[]>
   ) => {
-    // dispatch(
-    //   fetchProducts({
-    //     pagination: newPagination,
-    //     sortField: sorter.field as string,
-    //     sortOrder: sorter.order?.substring(
-    //       0,
-    //       sorter.order?.length - 3
-    //     ) as string,
-    //     ...filters,
-    //   })
-    // );
+    searchParams.set("_page", String(newPagination.current));
+    setSearchParams(searchParams);
+    dispatch(fetchProducts(searchParams));
   };
-  useEffect(() => {
-    // dispatch(fetchProducts(queryParams));
-  }, []);
 
   return (
     <Table
