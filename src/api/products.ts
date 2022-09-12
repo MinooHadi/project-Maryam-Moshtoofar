@@ -10,8 +10,6 @@ export const injectStore = (_store: any) => {
 };
 // GET Paginated Data
 export const PagedProductsRequest = async (params: URLSearchParams) => {
-  console.log(params.toString());
-
   let count: number;
   try {
     const response = await axiosPrivate.get<Product[]>(

@@ -62,8 +62,6 @@ export const productsSlice = createSlice({
     });
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
       const { products, queryParams } = action.payload;
-      console.log(queryParams);
-
       return {
         ...state,
         loading: false,
