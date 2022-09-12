@@ -4,20 +4,20 @@ import { Order } from "../types";
 import { Params } from "../types";
 import qs from "qs";
 
-import { GenerateParams } from "../utils";
+import { generateTableConfig } from "../utils";
 
 // fetch Paginated Data
-export const fetchPagedOrdersRequest = async (params: Params = {}) => {
+export const fetchPagedOrdersRequest = async (params: URLSearchParams) => {
+  let count: number;
   try {
     const response = await axiosPrivate.get(
-      `${ORDERS_URL}?${qs.stringify(GenerateParams(params))}`
+      `${ORDERS_URL}?${params.toString()}`
     );
-    const {data} = await axiosPrivate.get<Order[]>(ORDERS_URL);
+    count = await (await axiosPrivate.get<Order[]>(ORDERS_URL)).data.length;
 
     return {
       orders: response.data,
-      count: data.length,
-      queryParams: params,
+      queryParams: generateTableConfig(params, count),
     };
   } catch (error) {
     return Promise.reject(error);

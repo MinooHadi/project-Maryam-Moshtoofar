@@ -1,6 +1,7 @@
 import type { ColumnsType } from "antd/es/table";
 import { Order } from "../../../../types";
 import convertToPersian from "num-to-persian";
+
 export const columns: ColumnsType<Order> = [
   {
     title: "نام کاربر",
@@ -13,14 +14,14 @@ export const columns: ColumnsType<Order> = [
     key: "prices",
     render: (text) =>
       convertToPersian(
-        `${text.toLocaleString("fa-IR", { maximumFractionDigits: 2,})}  تومان`
+        `${text.toLocaleString("fa-IR", { maximumFractionDigits: 2 })}  تومان`
       ),
   },
   {
     title: "زمان ثبت سفارش",
     dataIndex: "createdAt",
-    sorter: true,
     key: "createdAt",
+    sorter: true,
     render: (_, record) =>
       new Date(record.createdAt).toLocaleDateString("fa-IR"),
   },

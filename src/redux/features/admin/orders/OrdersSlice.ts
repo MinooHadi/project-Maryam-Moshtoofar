@@ -10,10 +10,11 @@ const initialState = {
   queryParams: {
     pagination: {
       current: 1,
-      pageSize: 5,
+      pageSize: 2,
+      total: 0,
     },
-    sortField: undefined,
-    sortOrder: undefined,
+    sortField: null,
+    sortOrder: null,
   },
 } as OrdersState;
 
@@ -31,22 +32,13 @@ export const ordersSlice = createSlice({
       return { ...state, loading: true };
     });
     builder.addCase(fetchOrders.fulfilled, (state, action) => {
-      const { orders, queryParams,count } = action.payload;
-
+      const { orders, queryParams } = action.payload;
 
       return {
         ...state,
         loading: false,
         orders: orders,
-        queryParams: {
-          pagination: {
-            current: queryParams.pagination?.current,
-            pageSize: queryParams.pagination?.pageSize,
-            total:count
-          },
-          sortField: queryParams.sortField,
-          sortOrder: queryParams.sortOrder
-        },
+        queryParams: queryParams,
       };
     });
     builder.addCase(fetchOrders.rejected, (state, action) => {

@@ -8,11 +8,7 @@ import {
   fetchProducts,
   fetchSingleProduct,
 } from "../../../../redux/features/admin/products/productsSlice";
-import {
-  ColumnsType,
-  FilterValue,
-  SorterResult,
-} from "antd/lib/table/interface";
+import { ColumnsType, SorterResult } from "antd/lib/table/interface";
 import { Product } from "../../../../types";
 import { fetchCategories } from "../../../../redux/features/admin/categories/categoriesSlice";
 import { BASE_URL } from "../../../../config/api";
@@ -58,10 +54,13 @@ const ProductTable = (props: any) => {
     newPagination: TablePaginationConfig,
     sorter: SorterResult<Product> | SorterResult<Product[]>
   ) => {
-    if (sorter.order) {
-      const order = sorter.order?.substring(0, sorter.order?.length - 3);
-      searchParams.set("_order", order);
-    } else searchParams.delete("_order");
+    console.log(newPagination);
+    console.log(sorter);
+
+    // if (sorter.order) {
+    //   const order = sorter.order?.substring(0, sorter.order?.length - 3);
+    //   searchParams.set("_order", order);
+    // } else searchParams.delete("_order");
     searchParams.set("_page", String(newPagination.current));
     setSearchParams(searchParams);
     dispatch(fetchProducts(searchParams));
