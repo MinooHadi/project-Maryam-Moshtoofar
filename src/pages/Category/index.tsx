@@ -1,6 +1,6 @@
 import { Pagination, PaginationProps, Row } from "antd";
 import { useEffect } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { fetchCategory } from "../../redux/features/admin/categories/categoriesSlice";
 import { fetchProducts } from "../../redux/features/admin/products/productsSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/features/hooks";

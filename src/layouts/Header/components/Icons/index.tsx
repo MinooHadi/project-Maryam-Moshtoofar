@@ -16,15 +16,11 @@ import { getTotals } from "../../../../redux/features/main/cart/cartSlice";
 
 const Icons = () => {
   const { cartTotalQuantity } = useAppSelector((state) => state.cart);
-  const dispatch = useAppDispatch();
-  // useEffect(() => {
-  //   dispatch(getTotals(cartTotalQuantity));
-  // }, [cartTotalQuantity, dispatch]);
 
   return (
     <div style={styles.iconsContainer}>
       <NavLink to="cart">
-        <Badge count={cartTotalQuantity} style={styles.badge}>
+        <Badge count={cartTotalQuantity} style={styles.badge} showZero>
           <ShoppingOutlined style={styles.icon} />
         </Badge>
       </NavLink>

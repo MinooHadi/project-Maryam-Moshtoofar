@@ -1,15 +1,22 @@
-import { Button } from "antd";
-import { useEffect } from "react";
+import { Button, InputNumber } from "antd";
+import { useEffect, useState } from "react";
 import { items } from "../../layouts/Header/components/nav/items";
-import { getTotals, removeFromCart } from "../../redux/features/main/cart/cartSlice";
+import {
+  decreaseCart,
+  getTotals,
+  removeFromCart,
+} from "../../redux/features/main/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/features/hooks";
 import { Product } from "../../types";
 
 const Cart: React.FC = () => {
   const { cartItems } = useAppSelector((state) => state.cart);
   const { cartTotalAmount } = useAppSelector((state) => state.cart);
+  const [selectedProduct, setSelectedProduct] = useState();
   const dispatch = useAppDispatch();
   useEffect(() => {
+    console.log(cartItems);
+
     dispatch(getTotals(1));
   }, [dispatch, cartItems]);
 
@@ -17,14 +24,44 @@ const Cart: React.FC = () => {
     dispatch(removeFromCart(id));
   };
 
+  const handleInDecrease = (value: number) => {
+    console.log(selectedProduct);
+    // dispatch(decreaseCart(selectedProduct));
+  };
+
   return (
     <>
-      {cartItems.map((product: Product) => (
-        <div key={product.id}>
-          <div>{product.name}</div>
-          <Button onClick={() => handleRemove(product.id)}>حذف </Button>
-        </div>
-      ))}
+      {cartItems.length ? (
+        <>
+          {cartItems.map((product: Product) => (
+            <div key={product.id}>
+              <div>{product.name}</div>
+              <Button
+                danger
+                type="primary"
+                onClick={() => handleRemove(product.id)}
+              >
+                حذف{" "}
+              </Button>
+              <InputNumber
+                min={0}
+                defaultValue={
+                  cartItems.find((item: any) => item.id === product.id)
+                    .cartQuantity
+                }
+                onChange={() => {
+                  setSelectedProduct(
+                    cartItems.find((item: any) => item.id === product.id)
+                  );
+                }}
+              />
+            </div>
+          ))}
+          <div>مجموع: {cartTotalAmount}</div>
+        </>
+      ) : (
+        <div>سبد خرید شما خالی است</div>
+      )}
     </>
   );
 };
