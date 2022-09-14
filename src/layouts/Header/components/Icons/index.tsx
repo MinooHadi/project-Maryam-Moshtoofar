@@ -7,24 +7,24 @@ import {
 
 import { NavLink } from "react-router-dom";
 import { styles } from "./styles";
-
-// const styles = { backgroundColor: "#53A16E", color: "black" };
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../../redux/features/hooks";
+import { useEffect } from "react";
+import { getTotals } from "../../../../redux/features/main/cart/cartSlice";
 
 const Icons = () => {
+  const { cartTotalQuantity } = useAppSelector((state) => state.cart);
+  const dispatch = useAppDispatch();
+  // useEffect(() => {
+  //   dispatch(getTotals(cartTotalQuantity));
+  // }, [cartTotalQuantity, dispatch]);
+
   return (
     <div style={styles.iconsContainer}>
-      <NavLink to="#">
-        <Badge count={0}>
-          <UserOutlined style={styles.icon} />
-        </Badge>
-      </NavLink>
-      <NavLink to="#">
-        <Badge count={2} style={styles.badge}>
-          <HeartOutlined style={styles.icon} />
-        </Badge>
-      </NavLink>
       <NavLink to="cart">
-        <Badge count={3} style={styles.badge}>
+        <Badge count={cartTotalQuantity} style={styles.badge}>
           <ShoppingOutlined style={styles.icon} />
         </Badge>
       </NavLink>

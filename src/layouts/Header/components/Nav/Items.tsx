@@ -56,26 +56,6 @@ export const items = [
       },
     ],
   },
-  { label: "بلاگ", key: "item-3", disabled: true },
-  {
-    label: "صفحات",
-    key: "pages",
-    children: [
-      {
-        label: "درباره ما",
-        key: "page-1",
-        disabled: true,
-      },
-      {
-        label: "تماس با ما",
-        key: "page-2",
-        disabled: true,
-      },
-      {
-        label: "سوالات متداول",
-        key: "page-3",
-        disabled: true,
-      },
-    ],
-  },
+ 
+
 ];

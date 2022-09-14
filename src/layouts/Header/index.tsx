@@ -3,8 +3,6 @@ import { NavLink } from "react-router-dom";
 import Nav from "./components/nav";
 import Logo from "../../assets/images/logo.png";
 import Icons from "./components/Icons";
-import SearchBar from "./components/SearchBar";
-
 
 const { Header } = Layout;
 
@@ -17,10 +15,7 @@ const UserHeader: React.FC = () => {
             <img src={Logo} alt="logo" />
           </NavLink>
         </Col>
-        <Col className="span" span={5}>
-          <SearchBar />
-        </Col>
-        <Col className="span" span={10}>
+        <Col className="span" span={15}>
           <Nav />
         </Col>
         <Col className="span" span={5}>
