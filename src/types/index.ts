@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import store from "../redux/store";
 import type { TablePaginationConfig } from "antd/es/table";
 import type { SorterResult } from "antd/es/table/interface";
+import { URLSearchParamsInit } from "react-router-dom";
 
 export type Product = {
   id: string;
@@ -87,6 +88,11 @@ export type ProductManagementProps = {
   setFormFields: Dispatch<SetStateAction<FormFields>>;
   selectedProductID: number | null;
   setSelectedProductID: Dispatch<SetStateAction<number | null>>;
+  searchParams: URLSearchParams;
+  setSearchParams: (
+    nextInit: URLSearchParamsInit,
+    navigateOptions?: { replace?: boolean | undefined; state?: any } | undefined
+  ) => void;
 };
 
 export type DeleteModalProps = {

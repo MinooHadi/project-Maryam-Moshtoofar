@@ -1,5 +1,6 @@
 import { Modal} from "antd";
 import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import { ProductManagementProps } from "../../../../types";
 import AddProductForm from "../forms/addProducts";
@@ -11,7 +12,9 @@ const ProductModal: React.FC<ProductManagementProps> = ({
   setShowModal,
   formFields,
   setFormFields,
-  selectedProductID
+  selectedProductID,
+  searchParams,
+
 }) => {
 
   useEffect(() => {
@@ -35,7 +38,7 @@ return (
     >
       {editMode ?
        <EditProductForm selectedProductID={selectedProductID}></EditProductForm> 
-       :<AddProductForm modalOptions={formFields}/>}
+       :<AddProductForm searchParams={useSearchParams}/>}
       
       
     </Modal>

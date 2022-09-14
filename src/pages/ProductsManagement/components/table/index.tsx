@@ -16,12 +16,15 @@ import DeleteModal from "../deleteModal";
 import { useSearchParams } from "react-router-dom";
 
 const ProductTable = (props: any) => {
-  const { selectedProductID, setSelectedProductID, setShowModal, setEditMode } =
-    props;
-  const [searchParams, setSearchParams] = useSearchParams({
-    _page: "1",
-    _limit: "5",
-  });
+  const {
+    selectedProductID,
+    setSelectedProductID,
+    setShowModal,
+    setEditMode,
+    searchParams,
+    setSearchParams,
+  } = props;
+
   const state = useAppSelector((state) => state.products);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { categories } = useAppSelector((state) => state.categories);
@@ -54,9 +57,6 @@ const ProductTable = (props: any) => {
     newPagination: TablePaginationConfig,
     sorter: SorterResult<Product> | SorterResult<Product[]>
   ) => {
-    console.log(newPagination);
-    console.log(sorter);
-
     // if (sorter.order) {
     //   const order = sorter.order?.substring(0, sorter.order?.length - 3);
     //   searchParams.set("_order", order);
