@@ -1,4 +1,4 @@
-import { items } from "./items";
+import { items } from "./Items";
 import { Menu } from "antd";
 import { styles } from "./styles";
 
