@@ -1,4 +1,4 @@
-import { Pagination, PaginationProps, Row } from "antd";
+import { Pagination, PaginationProps, Row, Col } from "antd";
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { fetchCategory } from "../../redux/features/admin/categories/categoriesSlice";
@@ -26,14 +26,16 @@ const CategoryPage: React.FC = () => {
 
   return (
     <Row>
-      <Category />
-      <Sidebar />
-      <Pagination
-        current={current}
-        pageSize={pageSize}
-        total={total}
-        onChange={onChange}
-      />
+      <Col>
+        <Category />
+        {/* <Sidebar /> */}
+        <Pagination
+          current={current}
+          pageSize={pageSize}
+          total={total}
+          onChange={onChange}
+        />
+      </Col>
     </Row>
   );
 };

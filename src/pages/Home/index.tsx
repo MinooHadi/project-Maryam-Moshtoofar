@@ -1,11 +1,11 @@
-
-import CategoryPage from "../category";
-
-
+import Category from "../category/components/cat";
 
 const Home: React.FC = () => {
-
-  return <>Home</>
+  return (
+    <>
+      <Category />
+    </>
+  );
 };
 
 export default Home;
