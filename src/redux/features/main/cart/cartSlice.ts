@@ -86,7 +86,7 @@ const cartSlice = createSlice({
     clearCart(state, action) {
       state.cartItems = [];
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
-      // toast.error("Cart cleared", { position: "bottom-left" });
+      message.success("سبد شما خالی است");
     },
   },
 });

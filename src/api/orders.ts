@@ -23,3 +23,15 @@ export const fetchPagedOrdersRequest = async (params: URLSearchParams) => {
     return Promise.reject(error);
   }
 };
+
+export const CreateOrderRequest = async (newOrder: Order) => {
+  try {
+    const response = await axiosPrivate.post(ORDERS_URL, newOrder);
+
+    return {
+      order: response.data,
+    };
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};

@@ -1,9 +1,9 @@
 export const HOME_ROUTE = "/";
 export const CATEGORY_ROUTE = "categories";
 export const PRODUCT_ROUTE = "product:id";
-export const CART_ROUTE = "cart";
-export const CHECKOUT_ROUTE = "checkout";
-export const REDIRECT_ROUTE = "redirect";
+export const CART_ROUTE = "/cart";
+export const CHECKOUT_ROUTE = "/checkout";
+export const REDIRECT_ROUTE = "/redirect:param";
 export const LOGIN_ROUTE = "/login";
 export const PRODUCTS_MANAGEMENT_ROUTE = "/all-products";
 export const STOCK_PRICE_ROUTE = "/stock-price";

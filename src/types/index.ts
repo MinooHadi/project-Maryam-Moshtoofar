@@ -27,7 +27,7 @@ export type Order = {
     {
       id: string;
       name: string;
-      count: number;
+      cartQuantity: number;
       price: number;
       image: string;
     }
@@ -94,7 +94,6 @@ export type ProductManagementProps = {
     navigateOptions?: { replace?: boolean | undefined; state?: any } | undefined
   ) => void;
 };
-
 
 export type DeleteModalProps = {
   selectedProduct: number;

@@ -1,6 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { fetchPagedOrdersRequest } from "../../../../api/orders";
+import {
+  CreateOrderRequest,
+  fetchPagedOrdersRequest,
+} from "../../../../api/orders";
 import { OrdersState } from "../../../../types";
 
 const initialState = {
@@ -19,8 +22,13 @@ const initialState = {
 } as OrdersState;
 
 export const fetchOrders = createAsyncThunk(
-  "orders/fetchPosts",
+  "orders/fetchOrders",
   fetchPagedOrdersRequest
+);
+
+export const createNewOrder = createAsyncThunk(
+  "orders/createNewOrders",
+  CreateOrderRequest
 );
 
 export const ordersSlice = createSlice({
@@ -33,7 +41,6 @@ export const ordersSlice = createSlice({
     });
     builder.addCase(fetchOrders.fulfilled, (state, action) => {
       const { orders, queryParams } = action.payload;
-
       return {
         ...state,
         loading: false,
@@ -45,6 +52,22 @@ export const ordersSlice = createSlice({
       return {
         ...state,
         orders: [],
+        loading: false,
+        error: String(action.payload),
+      };
+    });
+
+    // create new order
+
+    builder.addCase(createNewOrder.pending, (state) => {
+      return { ...state, loading: true };
+    });
+    builder.addCase(createNewOrder.fulfilled, (state) => {
+      return { ...state, loading: false };
+    });
+    builder.addCase(createNewOrder.rejected, (state, action) => {
+      return {
+        ...state,
         loading: false,
         error: String(action.payload),
       };

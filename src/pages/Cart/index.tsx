@@ -8,6 +8,8 @@ import {
 } from "../../redux/features/main/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/features/hooks";
 import { Product } from "../../types";
+import { Link } from "react-router-dom";
+import { CHECKOUT_ROUTE } from "../../config/routes";
 
 const Cart: React.FC = () => {
   const { cartItems } = useAppSelector((state) => state.cart);
@@ -58,6 +60,9 @@ const Cart: React.FC = () => {
             </div>
           ))}
           <div>مجموع: {cartTotalAmount}</div>
+          <Button type="primary">
+            <Link to={CHECKOUT_ROUTE}>نهایی کردن سبد خرید</Link>
+          </Button>
         </>
       ) : (
         <div>سبد خرید شما خالی است</div>
