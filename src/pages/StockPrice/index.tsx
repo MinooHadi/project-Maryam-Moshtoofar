@@ -1,10 +1,10 @@
-import SaveChanges from "./components/saveChanges";
+import Header from "./components/header";
 import StockPriceTable from "./components/table";
 
 const ProductsManagement: React.FC = () => {
   return (
     <>
-      <SaveChanges />
+      <Header />
       <StockPriceTable />
     </>
   );

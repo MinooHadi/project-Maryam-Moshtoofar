@@ -1,17 +1,14 @@
-import { Typography, Row, Col, Button } from "antd";
+import { Typography, Row, Col } from "antd";
 import React from "react";
 const { Title } = Typography;
-const SaveChanges: React.FC = () => {
+const Header: React.FC = () => {
   return (
     <Row className="addProduct">
       <Col>
         <Title>مدیریت موجودی و قیمت ها</Title>
       </Col>
-      <Col>
-        <Button disabled>ذخیره</Button>
-      </Col>
     </Row>
   );
 };
 
-export default SaveChanges;
+export default Header;

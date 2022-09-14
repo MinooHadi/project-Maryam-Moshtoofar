@@ -95,6 +95,7 @@ export type ProductManagementProps = {
   ) => void;
 };
 
+
 export type DeleteModalProps = {
   selectedProduct: number;
   isModalOpen: boolean;
