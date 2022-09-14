@@ -24,6 +24,7 @@ import ProductsManagement from "../pages/ProductsManagement";
 import StockPrice from "../pages/stockPrice";
 import Orders from "../pages/orders";
 import NotFound from "../pages/notfound";
+import PrivateRoute from "./privateRoutes";
 
 const AppRoutes = () => {
   return (
@@ -39,7 +40,14 @@ const AppRoutes = () => {
           <Route path="*" element={<NotFound />} />
         </Route>
         <Route path={LOGIN_ROUTE} element={<Login />} />
-        <Route element={<AdminLayout />}>
+
+        <Route
+          element={
+            <PrivateRoute>
+              <AdminLayout />
+            </PrivateRoute>
+          }
+        >
           <Route
             path={PRODUCTS_MANAGEMENT_ROUTE}
             element={<ProductsManagement />}

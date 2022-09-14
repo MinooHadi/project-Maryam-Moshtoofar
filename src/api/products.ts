@@ -1,8 +1,9 @@
 import { PRODUCTS_URL } from "../config/api";
-import axiosPrivate from "./http";
+import axios, { axiosPrivate } from "./http";
 import { Product } from "../types";
 import { URLSearchParams } from "url";
 import { generateTableConfig } from "../utils";
+import { Axios } from "axios";
 let store: any;
 
 export const injectStore = (_store: any) => {
@@ -12,14 +13,14 @@ export const injectStore = (_store: any) => {
 export const PagedProductsRequest = async (params: URLSearchParams) => {
   let count: number;
   try {
-    const response = await axiosPrivate.get<Product[]>(
+    const response = await axios.get<Product[]>(
       `${PRODUCTS_URL}?${params.toString()}`
     );
 
-    count = await (await axiosPrivate.get<Product[]>(PRODUCTS_URL)).data.length;
+    count = await (await axios.get<Product[]>(PRODUCTS_URL)).data.length;
     if (params.get("category")) {
       count = await (
-        await axiosPrivate.get<Product[]>(
+        await axios.get<Product[]>(
           `${PRODUCTS_URL}?category=${params.get("category")}`
         )
       ).data.length;
@@ -51,7 +52,7 @@ export const createProductRequest = async (newProduct: Product) => {
 // GET single data
 export const singleProductRequest = async (id: string) => {
   try {
-    const response = await axiosPrivate.get<Product[]>(`${PRODUCTS_URL}/${id}`);
+    const response = await axios.get<Product[]>(`${PRODUCTS_URL}/${id}`);
     return response.data;
   } catch (error) {
     return Promise.reject(error);

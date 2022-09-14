@@ -1,8 +1,6 @@
-import { ORDERS_COUNT_URL, ORDERS_URL } from "../config/api";
-import axiosPrivate from "./http";
+import { ORDERS_URL } from "../config/api";
+import { axiosPrivate } from "./http";
 import { Order } from "../types";
-import { Params } from "../types";
-import qs from "qs";
 
 import { generateTableConfig } from "../utils";
 
