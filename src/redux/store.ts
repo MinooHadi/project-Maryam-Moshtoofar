@@ -3,7 +3,7 @@ import categoriesSlice from "./features/admin/categories/categoriesSlice";
 import ordersSlice from "./features/admin/orders/OrdersSlice";
 import productsSlice from "./features/admin/products/productsSlice";
 import usersSlice from "./features/user/usersSlice";
-import cartSlice from "./features/main/cart/cartSlice";
+import cartSlice from "./features/cart/cartSlice";
 
 const store = configureStore({
   reducer: {

@@ -3,8 +3,8 @@ import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FILES_ROUTE } from "../../config/api";
 import { fetchSingleProduct } from "../../redux/features/admin/products/productsSlice";
-import { addToCart, getTotals } from "../../redux/features/main/cart/cartSlice";
-import { useAppDispatch, useAppSelector } from "../../redux/features/hooks";
+import { addToCart, getTotals } from "../../redux/features/cart/cartSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
 const Product: React.FC = () => {
   const { id } = useParams();

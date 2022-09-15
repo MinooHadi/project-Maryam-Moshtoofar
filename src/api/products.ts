@@ -3,9 +3,8 @@ import axios, { axiosPrivate } from "./http";
 import { Product } from "../types";
 import { URLSearchParams } from "url";
 import { generateTableConfig } from "../utils";
-import { Axios } from "axios";
-let store: any;
 
+let store: any;
 export const injectStore = (_store: any) => {
   store = _store;
 };

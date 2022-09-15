@@ -21,7 +21,7 @@ import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import {
   useAppDispatch,
   useAppSelector,
-} from "../../../../redux/features/hooks";
+} from "../../../../redux/hooks";
 import {
   createProduct,
   fetchProducts,

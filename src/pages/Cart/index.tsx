@@ -5,8 +5,8 @@ import {
   decreaseCart,
   getTotals,
   removeFromCart,
-} from "../../redux/features/main/cart/cartSlice";
-import { useAppDispatch, useAppSelector } from "../../redux/features/hooks";
+} from "../../redux/features/cart/cartSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { Product } from "../../types";
 import { Link } from "react-router-dom";
 import { CHECKOUT_ROUTE } from "../../config/routes";

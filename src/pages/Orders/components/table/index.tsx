@@ -1,15 +1,19 @@
-import { Table, TablePaginationConfig } from "antd";
-import { columns } from "./columns";
-import { useEffect } from "react";
-import { fetchOrders } from "../../../../redux/features/admin/orders/OrdersSlice";
-import { FilterValue } from "antd/lib/table/interface";
-import { useSearchParams } from "react-router-dom";
+import { Button, Table, TablePaginationConfig } from "antd";
+import convertToPersian from "num-to-persian";
+import { useEffect, useState } from "react";
 import {
-  useAppSelector,
-  useAppDispatch,
-} from "../../../../redux/features/hooks";
+  fetchOrders,
+  fetchSingleOrder,
+} from "../../../../redux/features/admin/orders/OrdersSlice";
+import { ColumnsType, FilterValue } from "antd/lib/table/interface";
+import { useSearchParams } from "react-router-dom";
+import OrderModal from "../modal";
+import { useAppSelector, useAppDispatch } from "../../../../redux/hooks";
+import { Order } from "../../../../types";
 
 const OrdersTable: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams({
     _page: "1",
     _limit: "5",
@@ -17,8 +21,55 @@ const OrdersTable: React.FC = () => {
   const { orders } = useAppSelector((state) => state.orders);
   const loading = useAppSelector((state) => state.orders.loading);
   const queryParams = useAppSelector((state) => state.orders.queryParams);
-
-  const dispatch = useAppDispatch();
+  const { order } = useAppSelector((state) => state.orders);
+  const columns: ColumnsType<Order> = [
+    {
+      title: "نام کاربر",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "مجموع مبلغ",
+      dataIndex: "prices",
+      key: "prices",
+      render: (text) =>
+        convertToPersian(
+          `${text.toLocaleString("fa-IR", { maximumFractionDigits: 2 })}  تومان`
+        ),
+    },
+    {
+      title: "زمان ثبت سفارش",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      sorter: true,
+      render: (_, record) =>
+        new Date(record.createdAt).toLocaleDateString("fa-IR"),
+    },
+    {
+      title: "وضعیت",
+      dataIndex: "delivered",
+      filters: [
+        { text: "ارسال شده", value: true },
+        { text: "در حال انتظار", value: false },
+      ],
+      render: (_, record) =>
+        record.delivered === "true" ? (
+          <span>ارسال شده</span>
+        ) : (
+          <div>در انتظار</div>
+        ),
+      key: "delivered",
+    },
+    {
+      title: "عملیات",
+      key: "action",
+      render: (_: string, record: Order) => (
+        <Button onClick={() => handleClick(record.id)} type="primary">
+          بررسی سفارش
+        </Button>
+      ),
+    },
+  ];
 
   useEffect(() => {
     dispatch(fetchOrders(searchParams));
@@ -38,6 +89,11 @@ const OrdersTable: React.FC = () => {
     dispatch(fetchOrders(searchParams));
   };
 
+  const handleClick = (id: string) => {
+    setIsModalOpen(true);
+    dispatch(fetchSingleOrder(id));
+  };
+
   return (
     <>
       <Table
@@ -47,6 +103,11 @@ const OrdersTable: React.FC = () => {
         pagination={queryParams.pagination}
         loading={loading}
         onChange={handleTableChange}
+      />
+      <OrderModal
+        order={order!}
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
       />
     </>
   );

@@ -10,9 +10,9 @@ import { styles } from "./styles";
 import {
   useAppDispatch,
   useAppSelector,
-} from "../../../../redux/features/hooks";
+} from "../../../../redux/hooks";
 import { useEffect } from "react";
-import { getTotals } from "../../../../redux/features/main/cart/cartSlice";
+import { getTotals } from "../../../../redux/features/cart/cartSlice";
 
 const Icons = () => {
   const { cartTotalQuantity } = useAppSelector((state) => state.cart);

@@ -17,10 +17,7 @@ import {
   useRef,
   useState,
 } from "react";
-import {
-  useAppSelector,
-  useAppDispatch,
-} from "../../../../redux/features/hooks";
+import { useAppSelector, useAppDispatch } from "../../../../redux/hooks";
 import {
   fetchProducts,
   updateProduct,

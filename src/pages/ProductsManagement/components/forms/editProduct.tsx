@@ -20,7 +20,7 @@ import { Product } from "../../../../types";
 import {
   useAppDispatch,
   useAppSelector,
-} from "../../../../redux/features/hooks";
+} from "../../../../redux/hooks";
 import {
   fetchProducts,
   updateProduct,

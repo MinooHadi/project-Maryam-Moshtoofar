@@ -1,7 +1,7 @@
 import { Button, Form, Input, Typography } from "antd";
 import { Navigate } from "react-router-dom";
 import { ORDERS_ROUTE, } from "../../config/routes";
-import { useAppDispatch, useAppSelector } from "../../redux/features/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { login } from "../../redux/features/user/usersSlice";
 import { User } from "../../types";
 import { loginRules } from "./validation";

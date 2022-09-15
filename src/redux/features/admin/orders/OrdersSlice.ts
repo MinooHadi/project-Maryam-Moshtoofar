@@ -3,11 +3,23 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   CreateOrderRequest,
   fetchPagedOrdersRequest,
+  singleOrderRequest,
+  updateOrderRequest,
 } from "../../../../api/orders";
-import { OrdersState } from "../../../../types";
+import { OrdersState, OrderThunkConfig } from "../../../../types";
 
 const initialState = {
   orders: [],
+  order: {
+    id: "",
+    name: "",
+    address: "",
+    phone: "",
+    expectAt: 0,
+    createdAt: "",
+    delivered: "",
+    products: [{ id: "", name: "", cartQuantity: 0, price: 0, image: "" }],
+  },
   loading: false,
   error: "",
   queryParams: {
@@ -29,6 +41,17 @@ export const fetchOrders = createAsyncThunk(
 export const createNewOrder = createAsyncThunk(
   "orders/createNewOrders",
   CreateOrderRequest
+);
+
+export const fetchSingleOrder = createAsyncThunk(
+  "orders/fetchSingleOrder",
+  singleOrderRequest
+);
+
+export const updateOrder = createAsyncThunk(
+  "orders/updateOrder",
+  ({ id, UpdatedOrder }: OrderThunkConfig) =>
+    updateOrderRequest(id, UpdatedOrder)
 );
 
 export const ordersSlice = createSlice({
@@ -56,9 +79,18 @@ export const ordersSlice = createSlice({
         error: String(action.payload),
       };
     });
+    // read single order
+    builder.addCase(fetchSingleOrder.pending, (state) => {
+      return { ...state, loading: true };
+    });
+    builder.addCase(fetchSingleOrder.fulfilled, (state, action) => {
+      return { ...state, loading: false, order: action.payload };
+    });
+    builder.addCase(fetchSingleOrder.rejected, (state, action) => {
+      return { ...state, loading: false, error: String(action.payload) };
+    });
 
     // create new order
-
     builder.addCase(createNewOrder.pending, (state) => {
       return { ...state, loading: true };
     });
@@ -71,6 +103,17 @@ export const ordersSlice = createSlice({
         loading: false,
         error: String(action.payload),
       };
+    });
+
+    // update order
+    builder.addCase(updateOrder.pending, (state) => {
+      return { ...state, loading: true };
+    });
+    builder.addCase(updateOrder.fulfilled, (state, _) => {
+      return { ...state, loading: false };
+    });
+    builder.addCase(updateOrder.rejected, (state, action) => {
+      return { ...state, loading: false, error: String(action.payload) };
     });
   },
 });

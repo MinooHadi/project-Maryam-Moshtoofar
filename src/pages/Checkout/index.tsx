@@ -1,6 +1,6 @@
 import { Button, Form, Input, DatePicker } from "antd";
 import { SetStateAction, useState } from "react";
-import { useAppSelector } from "../../redux/features/hooks";
+import { useAppSelector } from "../../redux/hooks";
 
 const Checkout: React.FC = () => {
   const [expectAt, setExpectAt] = useState<SetStateAction<number>>();

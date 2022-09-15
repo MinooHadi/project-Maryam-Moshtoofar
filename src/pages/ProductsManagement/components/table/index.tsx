@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import {
   useAppSelector,
   useAppDispatch,
-} from "../../../../redux/features/hooks";
+} from "../../../../redux/hooks";
 import {
   fetchProducts,
   fetchSingleProduct,

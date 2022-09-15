@@ -20,7 +20,7 @@ export type Order = {
   name: string;
   address: string;
   phone: string;
-  expectAt: string;
+  expectAt: number;
   createdAt: string;
   delivered: string;
   products: [
@@ -47,6 +47,7 @@ export type Category = {
 
 export type OrdersState = {
   orders: Order[];
+  order: Order | null;
   loading: boolean;
   error: string;
   queryParams: {
@@ -100,6 +101,11 @@ export type DeleteModalProps = {
   isModalOpen: boolean;
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
 };
+export type OrderModalProps = {
+  order: Order;
+  isModalOpen: boolean;
+  setIsModalOpen: Dispatch<SetStateAction<boolean>>;
+};
 
 export type FormFields = {
   modalTitle: string;
@@ -133,4 +139,9 @@ export type asyncThunkConfig = {
 
 export type ProductCardProps = {
   product: Product;
+};
+
+export type OrderThunkConfig = {
+  id: string;
+  UpdatedOrder: Order;
 };

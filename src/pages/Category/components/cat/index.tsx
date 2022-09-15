@@ -1,7 +1,7 @@
 import { Col, Typography } from "antd";
 
 import ProductCard from "../../../../components/productCard";
-import { useAppSelector } from "../../../../redux/features/hooks";
+import { useAppSelector } from "../../../../redux/hooks";
 const { Title } = Typography;
 const Category = () => {
   const { products } = useAppSelector((state) => state.products);

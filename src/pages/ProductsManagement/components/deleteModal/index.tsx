@@ -1,6 +1,6 @@
 import { message, Modal } from 'antd';
 import { deleteProduct, fetchProducts } from '../../../../redux/features/admin/products/productsSlice';
-import { useAppDispatch } from '../../../../redux/features/hooks';
+import { useAppDispatch } from '../../../../redux/hooks';
 import { DeleteModalProps } from '../../../../types';
 const DeleteModal:React.FC<DeleteModalProps> = ({isModalOpen,setIsModalOpen,selectedProduct}) => {
 const dispatch = useAppDispatch()

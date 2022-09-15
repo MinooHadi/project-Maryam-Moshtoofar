@@ -1,5 +1,5 @@
 import { ORDERS_URL } from "../config/api";
-import { axiosPrivate } from "./http";
+import axios, { axiosPrivate } from "./http";
 import { Order } from "../types";
 
 import { generateTableConfig } from "../utils";
@@ -21,7 +21,17 @@ export const fetchPagedOrdersRequest = async (params: URLSearchParams) => {
     return Promise.reject(error);
   }
 };
+// Read Single Order
+export const singleOrderRequest = async (id: string) => {
+  try {
+    const response = await axios.get<Order>(`${ORDERS_URL}/${id}`);
+    return response.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
 
+// Create Order
 export const CreateOrderRequest = async (newOrder: Order) => {
   try {
     const response = await axiosPrivate.post(ORDERS_URL, newOrder);
@@ -29,6 +39,16 @@ export const CreateOrderRequest = async (newOrder: Order) => {
     return {
       order: response.data,
     };
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+// PUT
+export const updateOrderRequest = async (id: string, editedOrder: Order) => {
+  try {
+    const response = await axiosPrivate.put(`${ORDERS_URL}/${id}`, editedOrder);
+    return response.data;
   } catch (error) {
     return Promise.reject(error);
   }

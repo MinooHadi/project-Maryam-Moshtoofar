@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { fetchCategory } from "../../redux/features/admin/categories/categoriesSlice";
 import { fetchProducts } from "../../redux/features/admin/products/productsSlice";
-import { useAppDispatch, useAppSelector } from "../../redux/features/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import Category from "./components/cat";
 import Sidebar from "./components/sider";
 

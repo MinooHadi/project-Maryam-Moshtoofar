@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { CheckCircleFilled, CloseCircleFilled } from "@ant-design/icons";
-import { useAppDispatch } from "../../redux/features/hooks";
+import { useAppDispatch } from "../../redux/hooks";
 import { createNewOrder } from "../../redux/features/admin/orders/OrdersSlice";
-import { clearCart } from "../../redux/features/main/cart/cartSlice";
+import { clearCart } from "../../redux/features/cart/cartSlice";
 
 const Redirect: React.FC = () => {
   const dispatch = useAppDispatch();

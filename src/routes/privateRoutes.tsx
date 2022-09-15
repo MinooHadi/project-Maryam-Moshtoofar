@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import { Navigate } from "react-router-dom";
 import { LOGIN_ROUTE } from "../config/routes";
-import { useAppSelector } from "../redux/features/hooks";
+import { useAppSelector } from "../redux/hooks";
 
 function PrivateRoute(props: any) {
   const { isLoggedIn } = useAppSelector((state) => state.user);
