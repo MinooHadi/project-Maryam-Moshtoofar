@@ -18,21 +18,18 @@ import axiosPrivate from "../../../../api/http";
 import { UPLOAD_ROUTE } from "../../../../config/api";
 import { Product } from "../../../../types";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import {
-  useAppDispatch,
-  useAppSelector,
-} from "../../../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks";
 import {
   createProduct,
   fetchProducts,
 } from "../../../../redux/features/admin/products/productsSlice";
-import { useSearchParams } from "react-router-dom";
+import { addNotification } from "../notifications";
 const { Option } = Select;
 
 const AddProductForm = (props: any) => {
   const { product } = useAppSelector((state) => state.products);
 
-  const { modalOptions, searchParams } = props;
+  const { setShowModal, searchParams } = props;
   const [form] = Form.useForm();
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [defaultFileList, setDefaultFileList] = useState([]);
@@ -87,11 +84,15 @@ const AddProductForm = (props: any) => {
       description: description,
     };
     dispatch(createProduct(newProduct))
-      .then(() => dispatch(fetchProducts(searchParams)))
       .then(() => {
+        dispatch(fetchProducts(searchParams.toString()));
+        form.resetFields();
+        setShowModal(false);
         setImgArray([]);
+        addNotification("success");
         setDefaultFileList([]);
-      });
+      })
+      .then(() => console.log(defaultFileList));
   };
 
   return (
@@ -165,7 +166,7 @@ const AddProductForm = (props: any) => {
             </Button>
           </Form.Item>
           <Form.Item>
-            <Button htmlType="button">ریست</Button>
+            <Button onClick={() => form.resetFields()}>ریست</Button>
           </Form.Item>
         </Space>
       </Row>

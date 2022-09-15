@@ -115,12 +115,17 @@ const EditableCell: React.FC<EditableCellProps> = ({
           },
         ]}
       >
-        <Input ref={inputRef} onPressEnter={save} />
+        <Input
+          ref={inputRef}
+          onPressEnter={save}
+          onBlur={toggleEdit}
+          // formatter={(value:number) =>
+          //   `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+          // }
+        />
       </Form.Item>
     ) : (
       <div
-        className="editable-cell-value-wrap"
-        style={{ paddingRight: 24 }}
         onClick={toggleEdit}
       >
         {children}

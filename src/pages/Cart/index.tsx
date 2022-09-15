@@ -1,6 +1,6 @@
 import { Button, InputNumber } from "antd";
 import { useEffect, useState } from "react";
-import { items } from "../../layouts/Header/components/nav/Items";
+import { items } from "../../layouts/Header/components/nav/items";
 import {
   decreaseCart,
   getTotals,

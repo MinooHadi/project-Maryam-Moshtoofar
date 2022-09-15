@@ -4,7 +4,7 @@ import ProductModal from "../modal";
 const { Title } = Typography;
 
 const ProductHeader = (props: any) => {
-const { editMode,setShowModal , setEditMode} = props
+const { setShowModal , setEditMode} = props
 
   const handleClick = () => {
     setEditMode(false)

@@ -13,7 +13,6 @@ import { Product } from "../../../../types";
 import { fetchCategories } from "../../../../redux/features/admin/categories/categoriesSlice";
 import { BASE_URL } from "../../../../config/api";
 import DeleteModal from "../deleteModal";
-import { useSearchParams } from "react-router-dom";
 
 const ProductTable = (props: any) => {
   const {
