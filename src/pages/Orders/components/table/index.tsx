@@ -1,6 +1,7 @@
 import { Button, Table, TablePaginationConfig } from "antd";
 import convertToPersian from "num-to-persian";
 import { useEffect, useState } from "react";
+import { CheckCircleTwoTone, CloseCircleTwoTone } from "@ant-design/icons";
 import {
   fetchOrders,
   fetchSingleOrder,
@@ -54,9 +55,15 @@ const OrdersTable: React.FC = () => {
       ],
       render: (_, record) =>
         record.delivered === "true" ? (
-          <span>ارسال شده</span>
+          <>
+            <CheckCircleTwoTone twoToneColor="#52c41a" />
+            <span> ارسال شده</span>
+          </>
         ) : (
-          <div>در انتظار</div>
+          <>
+            <CloseCircleTwoTone twoToneColor="#e7001f" />
+            <span>در انتظار </span>
+          </>
         ),
       key: "delivered",
     },
@@ -90,8 +97,7 @@ const OrdersTable: React.FC = () => {
   };
 
   const handleClick = (id: string) => {
-    setIsModalOpen(true);
-    dispatch(fetchSingleOrder(id));
+    dispatch(fetchSingleOrder(id)).then(() => setIsModalOpen(true));
   };
 
   return (
