@@ -24,14 +24,20 @@ import {
   fetchProducts,
 } from "../../../../redux/features/admin/products/productsSlice";
 import { addNotification } from "../notifications";
+import { Rule } from "antd/lib/form";
 const { Option } = Select;
-
+const imgRules = [
+  {
+    validator: (_: Rule, value: any) =>
+      value
+        ? Promise.resolve()
+        : Promise.reject(new Error("Should accept agreement")),
+  },
+];
 const AddProductForm = (props: any) => {
-  const { product } = useAppSelector((state) => state.products);
-
+  const { loading } = useAppSelector((state) => state.products);
   const { setShowModal, searchParams } = props;
   const [form] = Form.useForm();
-  const [confirmLoading, setConfirmLoading] = useState(false);
   const [defaultFileList, setDefaultFileList] = useState([]);
   const [imgArray, setImgArray] = useState<string[]>([]);
   const [description, setDescription] = useState("");
@@ -68,14 +74,6 @@ const AddProductForm = (props: any) => {
     }
   };
 
-  const handleOk = () => {
-    message.loading("Action in progress..");
-    setConfirmLoading(true);
-    setTimeout(() => {
-      setConfirmLoading(false);
-    }, 2000);
-  };
-
   const onFinish = (values: any) => {
     const newProduct: Product = {
       ...values,
@@ -85,7 +83,7 @@ const AddProductForm = (props: any) => {
     };
     dispatch(createProduct(newProduct))
       .then(() => {
-        dispatch(fetchProducts(searchParams.toString()));
+        dispatch(fetchProducts(searchParams));
         form.resetFields();
         setShowModal(false);
         setImgArray([]);
@@ -119,7 +117,7 @@ const AddProductForm = (props: any) => {
       <Form.Item
         valuePropName="fileList"
         label="انتخاب عکس ها"
-        rules={addProductRules.images}
+        rules={imgRules}
       >
         <Upload
           accept="image/*"
@@ -161,7 +159,7 @@ const AddProductForm = (props: any) => {
         </Form.Item>
         <Space>
           <Form.Item>
-            <Button type="primary" htmlType="submit">
+            <Button loading={loading} type="primary" htmlType="submit">
               ذخیره محصول جدید
             </Button>
           </Form.Item>

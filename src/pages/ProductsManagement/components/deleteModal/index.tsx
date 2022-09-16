@@ -1,18 +1,26 @@
-import { message, Modal } from 'antd';
-import { deleteProduct, fetchProducts } from '../../../../redux/features/admin/products/productsSlice';
-import { useAppDispatch } from '../../../../redux/hooks';
-import { DeleteModalProps } from '../../../../types';
-const DeleteModal:React.FC<DeleteModalProps> = ({isModalOpen,setIsModalOpen,selectedProduct}) => {
-const dispatch = useAppDispatch()
+import { Modal } from "antd";
+import { useSearchParams } from "react-router-dom";
+import {
+  deleteProduct,
+  fetchProducts,
+} from "../../../../redux/features/admin/products/productsSlice";
+import { useAppDispatch } from "../../../../redux/hooks";
+import { DeleteModalProps } from "../../../../types";
+import { deleteNotification } from "../notifications";
+const DeleteModal: React.FC<DeleteModalProps> = ({
+  isModalOpen,
+  setIsModalOpen,
+  selectedProduct,
+}) => {
+  const dispatch = useAppDispatch();
+  const [searchParams, setSearchParams] = useSearchParams();
   const handleOk = () => {
-
     setIsModalOpen(false);
-    dispatch(deleteProduct(selectedProduct))
-    .then(()=>setIsModalOpen(false))
-    .then(()=>{
-        message.success('کالا حذف شد')
-      //  dispatch(fetchProducts())
-    } )
+    dispatch(deleteProduct(selectedProduct)).then(() => {
+      setIsModalOpen(false);
+      deleteNotification("success");
+      dispatch(fetchProducts(searchParams));
+    });
   };
 
   const handleCancel = () => {
@@ -20,9 +28,17 @@ const dispatch = useAppDispatch()
   };
 
   return (
-      <Modal title="حذف کالا" visible={isModalOpen} onOk={handleOk} onCancel={handleCancel} okText="بله" okType='danger' cancelText="خیر">
-        <p>آیا مطمئنید میخواهید کالا را حذف کنید؟ </p>
-      </Modal>
+    <Modal
+      title="حذف کالا"
+      visible={isModalOpen}
+      onOk={handleOk}
+      onCancel={handleCancel}
+      okText="بله"
+      okType="danger"
+      cancelText="خیر"
+    >
+      <p>آیا مطمئنید میخواهید کالا را حذف کنید؟ </p>
+    </Modal>
   );
 };
 
