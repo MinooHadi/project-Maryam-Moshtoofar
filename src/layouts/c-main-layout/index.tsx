@@ -1,13 +1,15 @@
 import React from "react";
-import AdminHeader from "../AdminHeader";
+import "antd/dist/antd.min.css";
 import { Outlet } from "react-router-dom";
-import Layout, { Content } from "antd/lib/layout/layout";
-
-const AdminLayout: React.FC = () => {
+import { Layout } from "antd";
+import Header from "../c-header";
+import Footer from "../c-footer";
+const { Content } = Layout;
+const MainLayout: React.FC = () => {
   return (
     <>
       <Layout>
-        <AdminHeader />
+        <Header />
         <Content
           style={{
             padding: "0 50px",
@@ -16,9 +18,10 @@ const AdminLayout: React.FC = () => {
         >
           <Outlet />
         </Content>
+        <Footer />
       </Layout>
     </>
   );
 };
 
-export default AdminLayout;
+export default MainLayout;

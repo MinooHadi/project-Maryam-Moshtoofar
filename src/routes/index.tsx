@@ -11,19 +11,19 @@ import {
   STOCK_PRICE_ROUTE,
   ORDERS_ROUTE,
 } from "../config/routes";
-import MainLayout from "../layouts/MainLayout";
-import Home from "../pages/home";
-import Product from "../pages/product";
-import Category from "../pages/category";
-import Cart from "../pages/cart";
-import Checkout from "../pages/checkout";
-import Redirect from "../pages/redirect";
-import Login from "../pages/login";
-import AdminLayout from "../layouts/AdminLayout";
-import ProductsManagement from "../pages/ProductsManagement";
-import StockPrice from "../pages/stockPrice";
-import Orders from "../pages/orders";
-import NotFound from "../pages/notfound";
+import MainLayout from "../layouts/c-main-layout";
+import Home from "../pages/c-home";
+import Product from "../pages/c-product";
+import Category from "../pages/c-category";
+import Cart from "../pages/c-cart";
+import Checkout from "../pages/c-checkout";
+import Redirect from "../pages/c-redirect";
+import Login from "../pages/c-login";
+import AdminLayout from "../layouts/c-admin-layout";
+import ProductsManagement from "../pages/c-products-management";
+import StockPrice from "../pages/c-stock-price";
+import Orders from "../pages/c-orders";
+import NotFound from "../pages/c-notfound";
 
 const AppRoutes = () => {
   return (
